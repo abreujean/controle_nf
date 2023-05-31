@@ -11,9 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('perfil', function (Blueprint $table) {
-            $table->id();
-            $table->enum('perfil', ['usuario', 'administrador']);
+        Schema::create('empresa', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('cnpj', 100);
+            $table->string('nome_fantasia', 100);
+            $table->string('razao_social', 100);
+            $table->string('codigo_cnae', 100);
+            $table->string('codhash', 100);
             $table->timestamps();
         });
     }
@@ -23,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('perfil');
+        Schema::dropIfExists('empresa');
     }
 };
