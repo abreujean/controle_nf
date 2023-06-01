@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Perfil extends Model
 {
     use HasFactory;
+
+    /**
+     * Atributos
+     */
+    protected $fillable = ['id', 'perfil'];
+
+    public function usuarios(){
+        return $this->hasMany(Usuario::class, 'id_perfil');
+    }
+
 }
