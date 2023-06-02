@@ -9,6 +9,13 @@ class Empresa extends Model
 {
     use HasFactory;
 
+    /**
+     * Tabela associada a esse modelo.
+     *
+     * @var string
+     */
+    protected $table = 'empresa';
+
     protected $fillable = ['id', 'cnpj', 'nome_fantasia', 'razao_social', 'codigo_cnae', 'codhash'];
 
     public function nota_ficais(){

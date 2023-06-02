@@ -9,6 +9,13 @@ class NotaFiscal extends Model
 {
     use HasFactory;
 
+    /**
+     * Tabela associada a esse modelo.
+     *
+     * @var string
+     */
+    protected $table = 'nota_fiscal';
+
     protected $fillable = ['id', 'id_usuario', 'id_empresa', 'numero', 'valor', 'mes_competencia', 'mes_caixa'];
 
     public function usuario(){

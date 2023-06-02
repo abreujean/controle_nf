@@ -9,6 +9,13 @@ class Usuario extends Model
 {
     use HasFactory;
 
+    /**
+     * Tabela associada a esse modelo.
+     *
+     * @var string
+     */
+    protected $table = 'usuario';
+
     protected $fillable = ['id', 'id_perfil', 'nome_completo', 'email', 'senha', 'ativo', 'codhash'];
 
     public function perfil(){

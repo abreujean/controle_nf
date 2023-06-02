@@ -10,6 +10,13 @@ class Perfil extends Model
     use HasFactory;
 
     /**
+     * Tabela associada a esse modelo.
+     *
+     * @var string
+     */
+    protected $table = 'perfil';
+
+    /**
      * Atributos
      */
     protected $fillable = ['id', 'perfil'];

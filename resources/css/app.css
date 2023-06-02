@@ -1,0 +1,11 @@
+/*Admin LTE*/
+@import 'admin-lte/dist/css/adminlte.min.css';
+
+/**Font Awesome*/
+@import 'admin-lte/plugins/fontawesome-free/css/all.min.css';
+
+/*icheck bootstrap*/
+@import 'admin-lte/plugins/icheck-bootstrap/icheck-bootstrap.min.css';
+
+/*sweetalert2*/
+@import 'admin-lte/plugins/sweetalert2/sweetalert2.min.css';
