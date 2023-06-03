@@ -33,7 +33,7 @@ abstract class FuncionarioController extends UsuarioController
            /**
             * Verifica se usuário está ativo.
             */
-            if(!$this->validarUsuarioAtivo(trim($request->usuario)))
+            if(!$this->validarUsuarioAtivo(trim($request->email)))
             {
                 throw new \Exception('Usuário não está ativo.');
             }

@@ -1,12 +1,26 @@
 import $ from "jquery";
 import Swal from 'sweetalert2';
-import {PERFIL_COLABORADOR, PERFIL_ADMINISTRADOR} from './helpers';
+import {PERFIL_ADMINISTRADOR} from './helpers';
 
-(() => {
-  console.log(PERFIL_COLABORADOR);
-})();
+/**
+ * Função para recuperar o id_perfil administrativo cujo email está como parametro.
+ */
+window.recuperarIdPerfilAdministrativoPeloEmail = function() {
+  const data = { email: $("#email").val() };
 
+  $.post({
+      headers: {
+          "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+      },
+      url: "/recuperar-id-perfil-administrativo-pelo-email",
+      type: "POST",
+      data: data,
+      success: function (data) {
+          $("#id_perfil").val(data);
+      },
+  });
 
+};
 
 /**
  * Funcao para fazer login
@@ -15,7 +29,7 @@ $("#login_form").submit(function (event) {
     event.preventDefault();
 
     const data = {
-        usuario: $("#email").val(),
+        email: $("#email").val(),
         senha: $("#senha").val()
     };
 
@@ -51,15 +65,12 @@ $("#login_form").submit(function (event) {
 })
 
 
-
 /**
  * Verificar qual rota seguir no login
  */
 const verificaRotaLogin = () => {
     var url = ""
-    if($("#id_perfil").val() == PERFIL_COLABORADOR){
-      url = "/logando-colaborador"
-    }else if($("#id_perfil").val() == PERFIL_ADMINISTRADOR){
+    if($("#id_perfil").val() == PERFIL_ADMINISTRADOR){
       url = "/logando-administrador"
     }else{
       url = "/logando-colaborador"
@@ -69,13 +80,11 @@ const verificaRotaLogin = () => {
 
 
 /**
- * Verificar qual rota seguir no login
+ * Verificar qual rota seguir apos realizar o login
  */
 const verificaRotaPainelAposLogin = () => {
     var url = ""
-    if($("#id_perfil").val() == PERFIL_COLABORADOR){
-      url = "/colaborador/painel"
-    }else if($("#id_perfil").val() == PERFIL_ADMINISTRADOR){
+    if($("#id_perfil").val() == PERFIL_ADMINISTRADOR){
       url = "/administrador/painel"
     }else{
       url = "/colaborador/painel"
@@ -83,3 +92,8 @@ const verificaRotaPainelAposLogin = () => {
 
     return url;
 };
+
+
+/*(() => {
+  window.teste();
+})();*/

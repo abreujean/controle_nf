@@ -9,3 +9,24 @@
 
 /*sweetalert2*/
 @import 'admin-lte/plugins/sweetalert2/sweetalert2.min.css';
+
+/*Tempusdominus Bootstrap 4*/
+@import 'admin-lte/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css';
+
+/*iCheck*/
+@import 'admin-lte/plugins/icheck-bootstrap/icheck-bootstrap.min.css';
+
+/*JQVMap*/
+@import 'admin-lte/plugins/jqvmap/jqvmap.min.css';
+
+/*Theme style*/
+@import 'admin-lte/dist/css/adminlte.min.css';
+
+/*overlayScrollbars*/
+@import 'admin-lte/plugins/overlayScrollbars/css/OverlayScrollbars.min.css';
+
+/*Daterange picker*/
+@import 'admin-lte/plugins/daterangepicker/daterangepicker.css';
+
+/*summernote*/
+@import 'admin-lte/plugins/summernote/summernote-bs4.min.css';

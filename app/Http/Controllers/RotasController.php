@@ -15,4 +15,9 @@ class RotasController extends Controller
         
         return view('login');
     }
+
+    public function irPainel(){
+        
+        return view('painel');
+    }
 }

@@ -10,6 +10,8 @@ abstract class UsuarioController extends Controller
 {
 
     abstract function fazerLogin(Request $request) : JsonResponse;
+
+    public static $ATIVO = 1;
     
     /**
      * Função para recuperar dados do usuário.
@@ -18,7 +20,7 @@ abstract class UsuarioController extends Controller
      */
     public function recuperarDadosUsuarioPeloEmail($email) : object
     {
-        $usuario = Usuario::where('codhash', $email)->get();
+        $usuario = Usuario::where('email', $email)->get();
         return $usuario;
     }
 
@@ -44,6 +46,6 @@ abstract class UsuarioController extends Controller
     protected function validarUsuarioAtivo($email): bool
     {
         $valor = Usuario::where('email',$email)->get();
-        return $valor[0]->id_status == StatusController::$ATIVO ? true : false;
+        return $valor[0]->ativo == UsuarioController::$ATIVO ? true : false;
     }
 }

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('perfil', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->enum('perfil', ['usuario', 'administrador']);
+            $table->enum('perfil', ['colaborador', 'administrador']);
             $table->timestamps();
         });
     }

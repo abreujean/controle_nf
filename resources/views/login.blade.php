@@ -9,13 +9,15 @@
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
 
-  @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/login.js'])
+  @vite(['resources/css/app.css'])
+  @vite(['resources/js/login.js'])
+  @vite(['resources/js/app.js'])
 
 </head>
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="{{ URL('/') }}"><b>Controle</b> de NF</a>
+    <a href="{{ URL('/') }}"><b>Controle</b> de NF!</a>
   </div>
   <!-- /.login-logo -->
   <div class="card">
@@ -23,8 +25,10 @@
       <p class="login-box-msg">Faça seu login aqui</p>
 
       <form id="login_form">
+        <input type="hidden" id="id_perfil" />
         <div class="input-group mb-3">
-          <input type="email" class="form-control" id="email" placeholder="Email">
+          <input type="email" class="form-control" id="email" placeholder="Email"
+          onfocusout='window.recuperarIdPerfilAdministrativoPeloEmail();'>
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
@@ -56,5 +60,11 @@
   </div>
 </div>
 <!-- /.login-box -->
+
+<script type="module">
+    import { recuperarIdPerfilAdministrativoPeloEmail } from '../resources/js/login.js';
+</script>
+
+
 </body>
 </html>
