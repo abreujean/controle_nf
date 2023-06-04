@@ -1,2 +1,0 @@
-export const PERFIL_COLABORADOR = 1;
-export const PERFIL_ADMINISTRADOR = 2;

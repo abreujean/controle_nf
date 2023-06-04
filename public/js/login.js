@@ -1,7 +1,3 @@
-import $ from "jquery";
-import Swal from 'sweetalert2';
-import {PERFIL_ADMINISTRADOR} from './helpers';
-
 /**
  * Função para recuperar o id_perfil administrativo cujo email está como parametro.
  */
@@ -25,7 +21,7 @@ window.recuperarIdPerfilAdministrativoPeloEmail = function() {
 /**
  * Funcao para fazer login
  */
-$("#login_form").submit(function (event) {
+$( "#login_form" ).on( "submit", function( event ) {
     event.preventDefault();
 
     const data = {

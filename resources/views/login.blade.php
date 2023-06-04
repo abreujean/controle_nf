@@ -1,70 +1,92 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="csrf-token" content="{{ csrf_token() }}">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Controle de NF | Log in</title>
+@extends('adminlte::auth.auth-page')
 
-  <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+@section('adminlte_css_pre')
+    <link rel="stylesheet" href="{{ asset('vendor/icheck-bootstrap/icheck-bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('vendor/sweetalert2/sweetalert2.min.css') }}">
 
-  @vite(['resources/css/app.css'])
-  @vite(['resources/js/login.js'])
-  @vite(['resources/js/app.js'])
+@stop
 
-</head>
-<body class="hold-transition login-page">
-<div class="login-box">
-  <div class="login-logo">
-    <a href="{{ URL('/') }}"><b>Controle</b> de NF!</a>
-  </div>
-  <!-- /.login-logo -->
-  <div class="card">
-    <div class="card-body login-card-body">
-      <p class="login-box-msg">Faça seu login aqui</p>
+@php( $login_url = View::getSection('login_url') ?? config('adminlte.login_url', 'login') )
+@php( $register_url = View::getSection('register_url') ?? config('adminlte.register_url', 'register') )
+@php( $password_reset_url = View::getSection('password_reset_url') ?? config('adminlte.password_reset_url', 'password/reset') )
 
-      <form id="login_form">
+@if (config('adminlte.use_route_url', false))
+    @php( $login_url = $login_url ? route($login_url) : '' )
+    @php( $register_url = $register_url ? route($register_url) : '' )
+    @php( $password_reset_url = $password_reset_url ? route($password_reset_url) : '' )
+@else
+    @php( $login_url = $login_url ? url($login_url) : '' )
+    @php( $register_url = $register_url ? url($register_url) : '' )
+    @php( $password_reset_url = $password_reset_url ? url($password_reset_url) : '' )
+@endif
+
+@section('auth_header', __('adminlte::adminlte.login_message'))
+
+@section('auth_body')
+    <form id="login_form">
+        @csrf
         <input type="hidden" id="id_perfil" />
+        {{-- Email field --}}
         <div class="input-group mb-3">
-          <input type="email" class="form-control" id="email" placeholder="Email"
-          onfocusout='window.recuperarIdPerfilAdministrativoPeloEmail();'>
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-envelope"></span>
+            <input type="email" id="email" name="email" class="form-control @error('email') is-invalid @enderror"
+                    onfocusout='recuperarIdPerfilAdministrativoPeloEmail();'
+                   value="{{ old('email') }}" placeholder="{{ __('adminlte::adminlte.email') }}" autofocus>
+
+            <div class="input-group-append">
+                <div class="input-group-text">
+                    <span class="fas fa-envelope {{ config('adminlte.classes_auth_icon', '') }}"></span>
+                </div>
             </div>
-          </div>
+
+            @error('email')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+            @enderror
         </div>
+
+        {{-- Password field --}}
         <div class="input-group mb-3">
-          <input type="password" class="form-control" id="senha" placeholder="Senha">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-lock"></span>
+            <input type="password" id="senha" name="password" class="form-control @error('password') is-invalid @enderror"
+                   placeholder="{{ __('adminlte::adminlte.password') }}">
+
+            <div class="input-group-append">
+                <div class="input-group-text">
+                    <span class="fas fa-lock {{ config('adminlte.classes_auth_icon', '') }}"></span>
+                </div>
             </div>
-          </div>
+
+            @error('password')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+            @enderror
         </div>
+
+        {{-- Login field --}}
         <div class="row">
 
-          <div class="col-8">
-            <button type="submit" class="btn btn-primary btn-block">Entrar</button>
-          </div>
-          <!-- /.col -->
+
+            <div class="col-12">
+                <button type=submit class="btn btn-block {{ config('adminlte.classes_auth_btn', 'btn-flat btn-primary') }}">
+                    <span class="fas fa-sign-in-alt"></span>
+                    {{ __('adminlte::adminlte.sign_in') }}
+                </button>
+            </div>
         </div>
-      </form>
 
-      <p class="mb-1">
-        <a href="forgot-password.html">Esqueci Minha Senha</a>
-      </p>
-    </div>
-    <!-- /.login-card-body -->
-  </div>
-</div>
-<!-- /.login-box -->
+    </form>
 
-<script type="module">
-    import { recuperarIdPerfilAdministrativoPeloEmail } from '../resources/js/login.js';
-</script>
+<!-- jquery -->
+<script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
+
+<script src="{{ asset('js/helpers.js?') . date('dmYHis') }}"></script>
+
+<!-- Login -->
+<script src="{{ asset('js/login.js?') . date('dmYHis') }}"></script>
+
+<script src="{{ asset('vendor/sweetalert2/sweetalert2.min.js')}}"></script>
+@stop
 
 
-</body>
-</html>
+
