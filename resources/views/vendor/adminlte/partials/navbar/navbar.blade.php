@@ -27,9 +27,10 @@
             @if(config('adminlte.usermenu_enabled'))
                 @include('adminlte::partials.navbar.menu-item-dropdown-user-menu')
             @else
-                @include('adminlte::partials.navbar.menu-item-logout-link')
+                
             @endif
         @endif
+        @include('adminlte::partials.navbar.menu-item-logout-link')
 
         {{-- Right sidebar toggler link --}}
         @if(config('adminlte.right_sidebar'))

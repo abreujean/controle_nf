@@ -80,11 +80,13 @@
 <!-- jquery -->
 <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
 
+<!-- helpers -->
 <script src="{{ asset('js/helpers.js?') . date('dmYHis') }}"></script>
 
 <!-- Login -->
 <script src="{{ asset('js/login.js?') . date('dmYHis') }}"></script>
 
+<!-- sweetalert2 -->
 <script src="{{ asset('vendor/sweetalert2/sweetalert2.min.js')}}"></script>
 @stop
 

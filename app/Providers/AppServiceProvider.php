@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Support\ServiceProvider;
+use JeroenNoten\LaravelAdminLte\Http\ViewComposers\AdminLteComposer;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -17,8 +19,9 @@ class AppServiceProvider extends ServiceProvider
     /**
      * Bootstrap any application services.
      */
-    public function boot(): void
+    public function boot(Factory $view): void
     {
-        //
+        $view->composer('painel', AdminLteComposer::class);
+        
     }
 }
