@@ -52,7 +52,7 @@ class EmpresaController extends Controller
      * @param placa
      * @return boolean
      */
-    public function recuperarIDPeloCodHashEmpresa($codhash): bool
+    public function recuperarIDPeloCodHashEmpresa($codhash): int
     {
         $empresa = Empresa::where('codhash', $codhash)->get();
         return $empresa[0]->id;
@@ -64,7 +64,7 @@ class EmpresaController extends Controller
      * @param $id_empresa
      * @return void
      */
-    public function excluirEmpersa($id) : void {
+    public function excluirEmpresa($id) : void {
         Empresa::where(['id' => $id])->delete();
     }
 }
