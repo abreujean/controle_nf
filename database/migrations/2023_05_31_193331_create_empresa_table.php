@@ -14,9 +14,7 @@ return new class extends Migration
         Schema::create('empresa', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('cnpj', 100);
-            $table->string('nome_fantasia', 100);
             $table->string('razao_social', 100);
-            $table->string('codigo_cnae', 100);
             $table->string('codhash', 100);
             $table->timestamps();
         });

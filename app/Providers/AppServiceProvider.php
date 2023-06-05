@@ -21,7 +21,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(Factory $view): void
     {
-        $view->composer('painel', AdminLteComposer::class);
+        $view->composer('*', AdminLteComposer::class);
         
     }
 }

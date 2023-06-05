@@ -13,7 +13,7 @@
 
 @section('body')
     <div class="wrapper">
-
+        <input type="hidden" value="{{ $PREFIXO }}" id="prefixo">
         {{-- Preloader Animation --}}
         @if($layoutHelper->isPreloaderEnabled())
             @include('adminlte::partials.common.preloader')
@@ -41,7 +41,7 @@
 
 
             <div class="content-header">
-                <div class="{{ config('adminlte.classes_content_header') ?: $def_container_class }}">
+                <div class="{{ config('adminlte.classes_content_header') ?: $def_container_class }} col-12">
                     @yield('content_header')
                 </div>
             </div>
@@ -49,7 +49,7 @@
 
             {{-- Main Content --}}
             <div class="content">
-                <div class="{{ config('adminlte.classes_content') ?: $def_container_class }}">
+                <div class="{{ config('adminlte.classes_content') ?: $def_container_class }} col-12">
                     @yield('content')
                 </div>
             </div>
@@ -71,6 +71,10 @@
 @stop
 
 @section('adminlte_js')
+    <!-- helpers -->
+    <script src="{{ asset('js/helpers.js?') . date('dmYHis') }}"></script>
+
     @stack('js')
     @yield('js')
+
 @stop

@@ -19,4 +19,12 @@ class PerfilController extends Controller
         $valor = Usuario::where('email', $request->email)->get();
         return isset($valor[0]->id_perfil) ? $valor[0]->id_perfil : 0;
     }
+
+    /**
+     * Função para recuperar o perfil do usuário logado na sessão
+     */
+
+     public function recuperaPerfilUsuarioLogado() : array {
+        return session()->get('usuario')[0]->perfil->perfil;
+     }
 }

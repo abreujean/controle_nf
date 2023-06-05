@@ -30,6 +30,7 @@ return new class extends Migration
             $table->string('valor', 100);
             $table->date('mes_competencia');
             $table->date('mes_caixa');
+            $table->string('codhash', 100);
 
             $table->timestamps();
         });
