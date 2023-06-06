@@ -16,7 +16,7 @@
                 <img src="{{  URL::asset('img/user.png') }}" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block">{{Session::get('usuario')[0]->nome_completo}}</a>
+                <a href="{{ URL('/') }}/{{ $PREFIXO }}/painel" class="d-block">{{Session::get('usuario')[0]->nome_completo}}</a>
             </div>
         </div>
 
@@ -31,7 +31,7 @@
 
                 <li class="nav-item">
 
-                    <a class="nav-link" href="{{ URL('/') }}/{{ $PREFIXO }}/cadastro-nf">
+                    <a class="nav-link" href="{{ URL('/') }}/{{ $PREFIXO }}/cadastro-nota-fiscal">
 
                         <i class="fas fa-fw fa-user"></i>
 
@@ -46,7 +46,7 @@
 
                 <li class="nav-item">
 
-                    <a class="nav-link" href="{{ URL('/') }}/{{ $PREFIXO }}/controle-nf">
+                    <a class="nav-link" href="{{ URL('/') }}/{{ $PREFIXO }}/controle-nota-fiscal">
 
                         <i class="fas fa-fw fa-user"></i>
 

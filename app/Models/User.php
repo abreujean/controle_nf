@@ -2,44 +2,36 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Model;
+use Symfony\Component\CssSelector\Exception\ExpressionErrorException;
 
-class User extends Authenticatable
+class User extends Model
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasFactory;
 
     /**
-     * The attributes that are mass assignable.
+     * Tabela associada a esse modelo.
      *
-     * @var array<int, string>
+     * @var string
      */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
+    protected $table = 'user';
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
+    protected $fillable = ['id', 'id_profile', 'name', 'email', 'password', 'phone', 'alert', 'active', 'codhash'];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-        'password' => 'hashed',
-    ];
+    public function profile(){
+        return $this->belongsTo(Perfil::class, 'id_profile');
+    }
+
+    public function log_users(){
+        return $this->hasMany(LogUser::class, 'id_user');
+    }
+
+    public function invoices(){
+        return $this->hasMany(Invoice::class, 'id_user');
+    }
+
+    public function expenses(){
+        return $this->hasMany(Expense::class, 'id_user');
+    }
 }

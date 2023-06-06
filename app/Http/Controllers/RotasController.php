@@ -7,9 +7,12 @@ use Illuminate\Support\Facades\Redirect;
 
 class RotasController extends Controller
 {
+
+    public $empresaController;
+
     public function __construct()
     {
-        
+        $this->empresaController = new EmpresaController();    
     }
 
     public function logout()
@@ -28,8 +31,20 @@ class RotasController extends Controller
         return view('painel');
     }
 
-    public function irCadastroNF(){
-        return view('cadastro-nf');
+    public function irCadastroNotaFiscal(){
+
+        $listarEmpresa = $this->empresaController->listarEmpresa();
+
+        return view('cadastro-nota-fiscal', compact('listarEmpresa'));
+    }
+
+    public function irControleNotaFiscal(){
+        return view('controle-nota-fiscal');
+    }
+
+    public function irEditarNotaFiscal(){
+        
+        return view('editar-nota-fiscal');
     }
 
     public function irCadastroEmpresa(){

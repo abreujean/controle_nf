@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdministradorController;
 use App\Http\Controllers\ColaboradorController;
 use App\Http\Controllers\EmpresaController;
+use App\Http\Controllers\NotaFiscalController;
 use App\Http\Controllers\PerfilController;
 use App\Http\Controllers\RotasController;
 use Illuminate\Support\Facades\Config;
@@ -36,7 +37,11 @@ Route::get('/recuperar-perfil-usuario-logado', [PerfilController::class, 'recupe
      * ROTAS
      */
     Route::get('/painel', [RotasController::class, 'irPainel']);
-    Route::get('/cadastro-nf', [RotasController::class, 'irCadastroNF']);
+
+    Route::get('/cadastro-nota-fiscal', [RotasController::class, 'irCadastroNotaFiscal']);
+    Route::get('/controle-nota-fiscal', [RotasController::class, 'irControleNotaFiscal']);
+    Route::get('/editar-nota-fiscal', [RotasController::class, 'irEditarNotaFiscal']);
+
     Route::get('/cadastro-empresa', [RotasController::class, 'irCadastroEmpresa']);
     Route::get('/controle-empresa', [RotasController::class, 'irControleEmpresa']);
 
@@ -47,6 +52,11 @@ Route::get('/recuperar-perfil-usuario-logado', [PerfilController::class, 'recupe
     Route::post('/cadastrando-empresa', [ColaboradorController::class, 'cadastrarEmpresa']);
     Route::post('/excluindo-empresa', [ColaboradorController::class, 'excluirEmpresa']);
     Route::get('/listar-empresa', [EmpresaController::class, 'listarEmpresa']);
+
+    Route::post('/cadastrando-nota-fiscal', [AdministradorController::class, 'cadastrarNotaFiscal']);
+    Route::get('/listar-nota-fiscal', [NotaFiscalController::class, 'listarNotaFiscal']);
+    Route::post('/excluindo-nota-fiscal', [ColaboradorController::class, 'excluirNotaFiscal']);
+
 
 
 });
@@ -61,7 +71,12 @@ Route::group(['prefix' => 'administrador', 'middleware' => 'VerificaSeUsuarioLog
      * ROTAS
      */
     Route::get('/painel', [RotasController::class, 'irPainel']);
-    Route::get('/cadastro-nf', [RotasController::class, 'irCadastroNF']);
+
+    Route::get('/cadastro-nota-fiscal', [RotasController::class, 'irCadastroNotaFiscal']);
+    Route::get('/controle-nota-fiscal', [RotasController::class, 'irControleNotaFiscal']);
+    Route::get('/editar-nota-fiscal', [RotasController::class, 'irEditarNotaFiscal']);
+
+
     Route::get('/cadastro-empresa', [RotasController::class, 'irCadastroEmpresa']);
     Route::get('/controle-empresa', [RotasController::class, 'irControleEmpresa']);
 
@@ -73,6 +88,10 @@ Route::group(['prefix' => 'administrador', 'middleware' => 'VerificaSeUsuarioLog
     Route::post('/cadastrando-empresa', [AdministradorController::class, 'cadastrarEmpresa']);
     Route::post('/excluindo-empresa', [AdministradorController::class, 'excluirEmpresa']);
     Route::get('/listar-empresa', [EmpresaController::class, 'listarEmpresa']);
+
+    Route::post('/cadastrando-nota-fiscal', [AdministradorController::class, 'cadastrarNotaFiscal']);
+    Route::get('/listar-nota-fiscal', [NotaFiscalController::class, 'listarNotaFiscal']);
+    Route::post('/excluindo-nota-fiscal', [AdministradorController::class, 'excluirNotaFiscal']);
 
 
 

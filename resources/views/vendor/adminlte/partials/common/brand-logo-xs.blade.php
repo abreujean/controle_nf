@@ -8,7 +8,7 @@
     @php( $dashboard_url = $dashboard_url ? url($dashboard_url) : '' )
 @endif
 
-<a href="{{ $dashboard_url }}"
+<a href="{{ URL('/') }}/{{ $PREFIXO }}/painel"
     @if($layoutHelper->isLayoutTopnavEnabled())
         class="navbar-brand {{ config('adminlte.classes_brand') }}"
     @else
