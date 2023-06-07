@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('email', 40);
             $table->string('password', 50);
             $table->string('phone', 20);
-            $table->enum('alert', ['desativado', 'sms'. 'email']);
+            $table->enum('alert', ['desativado', 'sms', 'email']);
             $table->boolean('active');
             $table->string('codhash', 100);
             $table->timestamps();

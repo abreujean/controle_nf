@@ -25,11 +25,11 @@
 @section('auth_body')
     <form id="login_form">
         @csrf
-        <input type="hidden" id="id_perfil" />
+        <input type="hidden" id="id_profile" />
         {{-- Email field --}}
         <div class="input-group mb-3">
             <input type="email" id="email" name="email" class="form-control @error('email') is-invalid @enderror"
-                    onfocusout='recuperarIdPerfilAdministrativoPeloEmail();'
+                    onfocusout='recoveProfileIdByEmail();'
                    value="{{ old('email') }}" placeholder="{{ __('adminlte::adminlte.email') }}" autofocus>
 
             <div class="input-group-append">
@@ -47,7 +47,7 @@
 
         {{-- Password field --}}
         <div class="input-group mb-3">
-            <input type="password" id="senha" name="password" class="form-control @error('password') is-invalid @enderror"
+            <input type="password" id="password" name="password" class="form-control @error('password') is-invalid @enderror"
                    placeholder="{{ __('adminlte::adminlte.password') }}">
 
             <div class="input-group-append">

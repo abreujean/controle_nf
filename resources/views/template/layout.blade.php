@@ -13,7 +13,7 @@
 
 @section('body')
     <div class="wrapper">
-        <input type="hidden" value="{{ $PREFIXO }}" id="prefixo">
+        <input type="hidden" value="{{ $PREFIX }}" id="prefix">
         {{-- Preloader Animation --}}
         @if($layoutHelper->isPreloaderEnabled())
             @include('adminlte::partials.common.preloader')

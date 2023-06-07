@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\LogUsuario;
+use App\Models\LogUser;
 use Illuminate\Http\Request;
 use Ramsey\Uuid\Uuid;
 
@@ -19,16 +19,16 @@ class LogController extends Controller
     public static $VINCULAR = "VINCULOU";
 
     /**
-     * Função para gravar um novo Log no sistema.
-     * @param $id_usuario, $tipo_evento, $evento
+     * Fuction to record log user in sistem .
+     * @param $id_user, $event_type, $event
      * @return void
      */
-    public function gravarLog($id_usuario, $tipo_evento, $evento) : void {
+    public function newLog($id_user, $event_type, $event) : void {
 
-        LogUsuario::create([
-            'id_usuario' => $id_usuario,
-            'tipo_evento' => $tipo_evento,
-            'evento' => $evento,
+        LogUser::create([
+            'id_user' => $id_user,
+            'event_type' => $event_type,
+            'event' => $event,
             'codhash' => Uuid::uuid4(),
         ]);
 

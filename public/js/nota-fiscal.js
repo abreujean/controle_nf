@@ -37,7 +37,7 @@ $( "#notaFiscal-form-cadastrar" ).on( "submit", function( event ) {
       headers: {
           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
       },
-      url: '/' + PREFIXO + '/cadastrando-nota-fiscal',
+      url: '/' + PREFIX + '/cadastrando-nota-fiscal',
       dataType : 'json',
       type: 'POST',
       data: data,
@@ -63,7 +63,7 @@ const listarNotaFiscal = () => {
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
-        url: '/' + PREFIXO + '/listar-nota-fiscal',
+        url: '/' + PREFIX + '/listar-nota-fiscal',
         dataType : 'json',
         type: 'GET',
         //data: 'codhash='+$("#codhash").val(),
@@ -97,7 +97,8 @@ const listarNotaFiscal = () => {
                          render: function(data, type, row, meta){
                             return `
                             <i class="fas fa-edit text-primary ml-3 mr-3 " onclick="editarNotaFiscal('${row.codhash}')" style="cursor: pointer; font-size: 18px;"></i>
-                            <i class="fas fa-trash text-danger " onclick="excluirNotaFiscal('${row.codhash}')" style="cursor: pointer; font-size: 18px;"></i>`
+                            <i class="fas fa-trash text-danger " onclick="excluirNotaFiscal('${row.codhash}')" style="cursor: pointer; font-size: 18px;"></i>
+                            `
                          }
                       },
                 ]
@@ -146,7 +147,7 @@ $( "#editar-nota-fiscal" ).on( "submit", function( event ) {
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
-        url: '/' + PREFIXO + '/editar-nota-fiscal/editando',
+        url: '/' + PREFIX + '/editar-nota-fiscal/editando',
         dataType : 'json',
         type: 'POST',
         data: data,
@@ -199,7 +200,7 @@ const excluirNotaFiscal = codhash => {
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
-                url: '/' + PREFIXO + '/excluindo-nota-fiscal',
+                url: '/' + PREFIX + '/excluindo-nota-fiscal',
                 dataType : 'json',
                 type: 'POST',
                 data: data,

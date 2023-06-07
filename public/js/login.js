@@ -1,18 +1,18 @@
 /**
- * Função para recuperar o id_perfil administrativo cujo email está como parametro.
+ * Functio to recover user id_profile by email
  */
-window.recuperarIdPerfilAdministrativoPeloEmail = function() {
+const recoveProfileIdByEmail = () => {
   const data = { email: $("#email").val() };
 
   $.post({
       headers: {
           "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
       },
-      url: "/recuperar-id-perfil-administrativo-pelo-email",
+      url: "/recover-profile-id-by-email",
       type: "POST",
       data: data,
       success: function (data) {
-          $("#id_perfil").val(data);
+          $("#id_profile").val(data);
       },
   });
 
@@ -26,8 +26,10 @@ $( "#login_form" ).on( "submit", function( event ) {
 
     const data = {
         email: $("#email").val(),
-        senha: $("#senha").val()
+        password: $("#password").val()
     };
+
+    console.log(data);
 
     const Toast = Swal.mixin({
         toast: true,
@@ -45,13 +47,13 @@ $( "#login_form" ).on( "submit", function( event ) {
         headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
         },
-        url: verificaRotaLogin(),
+        url: checkRouteLogin(),
         dataType: "json",
         type: "POST",
         data: data,
         success: function (data) {
             Toast.fire({ icon: "success", title: data });
-            location.href = verificaRotaPainelAposLogin();
+            location.href = checkRouteDashboardAfterLogin();
         },
         error: function (jqXHR, status, error) {
             Toast.fire({ icon: "error", title: jqXHR.responseJSON });
@@ -64,12 +66,12 @@ $( "#login_form" ).on( "submit", function( event ) {
 /**
  * Verificar qual rota seguir no login
  */
-const verificaRotaLogin = () => {
+const checkRouteLogin = () => {
     var url = ""
-    if($("#id_perfil").val() == PERFIL_ADMINISTRADOR){
-      url = "/logando-administrador"
+    if($("#id_profile").val() == PROFILE_ADMINISTRATOR){
+      url = "/logging-administrato"
     }else{
-      url = "/logando-colaborador"
+      url = "/logging-contributor"
     }
     return url;
 };
@@ -78,12 +80,12 @@ const verificaRotaLogin = () => {
 /**
  * Verificar qual rota seguir apos realizar o login
  */
-const verificaRotaPainelAposLogin = () => {
+const checkRouteDashboardAfterLogin = () => {
     var url = ""
-    if($("#id_perfil").val() == PERFIL_ADMINISTRADOR){
-      url = "/administrador/painel"
+    if($("#id_profile").val() == PROFILE_ADMINISTRATOR){
+      url = "/administrator/dashboard"
     }else{
-      url = "/colaborador/painel"
+      url = "/collaborator/dashboard"
     }
 
     return url;

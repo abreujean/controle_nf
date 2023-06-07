@@ -1,99 +1,114 @@
 <?php
 
-use App\Http\Controllers\AdministradorController;
-use App\Http\Controllers\ColaboradorController;
-use App\Http\Controllers\EmpresaController;
-use App\Http\Controllers\NotaFiscalController;
-use App\Http\Controllers\PerfilController;
-use App\Http\Controllers\RotasController;
+use App\Http\Controllers\AdministratorController;
+use App\Http\Controllers\CollaboratorController;
+use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\MeiController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RoutesController;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\View;
 
 /**
- * Rotas gerais
+ * Comum Routes
  */
 
-Route::get('/', [RotasController::class, 'irLogin']);
-Route::get('/login', [RotasController::class, 'irLogin']);
+Route::get('/', [RoutesController::class, 'goLogin']);
+Route::get('/login', [RoutesController::class, 'goLogin']);
 
-Route::post('/logout', [RotasController::class, 'logout']);
-Route::post('/logando-colaborador', [ColaboradorController::class, 'fazerLogin']);
-Route::post('/logando-administrador', [AdministradorController::class, 'fazerLogin']);
-Route::post('/recuperar-id-perfil-administrativo-pelo-email', [PerfilController::class, 'recuperarIdPerfilAdministrativoPeloEmail']);
+Route::post('/logout', [RoutesController::class, 'logout']);
+Route::post('/logging-contributor', [CollaboratorController::class, 'doLogin']);
+Route::post('/logging-administrato', [AdministratorController::class, 'doLogin']);
+Route::post('/recover-profile-id-by-email', [ProfileController::class, 'recoveProfileIdByEmail']);
 
-Route::get('/recuperar-perfil-usuario-logado', [PerfilController::class, 'recuperaPerfilUsuarioLogado']);
+Route::get('/recover-user-profile-logged', [ProfileController::class, 'recoverUserProfilelogged']);
 
 
 
 /**
- * Rotas colaborador (Precisa está logado)
+ * Collaborator Routes
  */
 
- Route::group(['prefix' => 'colaborador', 'middleware' => 'VerificaSeUsuarioLogado',  'middleware' => 'VerificaSeUsuarioColaborador'], function () {
+ Route::group(['prefix' => 'collaborator', 'middleware' => 'VerificaSeUsuarioLogado',  'middleware' => 'VerificaSeUsuarioColaborador'], function () {
 
-    /**
-     * ROTAS
-     */
-    Route::get('/painel', [RotasController::class, 'irPainel']);
+ 
+    Route::get('/dashboard', [RoutesController::class, 'goDashboard']);
 
-    Route::get('/cadastro-nota-fiscal', [RotasController::class, 'irCadastroNotaFiscal']);
-    Route::get('/controle-nota-fiscal', [RotasController::class, 'irControleNotaFiscal']);
-    Route::get('/editar-nota-fiscal', [RotasController::class, 'irEditarNotaFiscal']);
+    Route::get('/company-create', [RoutesController::class, 'goCompanyCreate']);
+    Route::get('/company-control', [RoutesController::class, 'goCompanyControl']);
+    Route::get('/edit-company/{codhash}', [RoutesController::class, 'goCompanyEdit']);
 
-    Route::get('/cadastro-empresa', [RotasController::class, 'irCadastroEmpresa']);
-    Route::get('/controle-empresa', [RotasController::class, 'irControleEmpresa']);
+    Route::get('/category-create', [RoutesController::class, 'goCategoryCreate']);
+    Route::get('/category-control', [RoutesController::class, 'goCategoryControl']);
+    Route::get('/edit-category/{codhash}', [RoutesController::class, 'goCategoryEdit']);
+
+    Route::get('/mei-control', [RoutesController::class, 'goMeiControl']);
+    Route::get('/edit-mei/{codhash}', [RoutesController::class, 'goMeiEdit']);
 
 
     /**
      * EXECUÇOES
      */
-    Route::post('/cadastrando-empresa', [ColaboradorController::class, 'cadastrarEmpresa']);
-    Route::post('/excluindo-empresa', [ColaboradorController::class, 'excluirEmpresa']);
-    Route::get('/listar-empresa', [EmpresaController::class, 'listarEmpresa']);
+    Route::post('/creating-company', [CollaboratorController::class, 'createdCompany']);
+    Route::post('/deleting-company', [CollaboratorController::class, 'deleteCompany']);
+    Route::post('/edit-company/editing', [CollaboratorController::class, 'editCompany']);
+    Route::get('/list-company', [CompanyController::class, 'listCompany']);
 
-    Route::post('/cadastrando-nota-fiscal', [AdministradorController::class, 'cadastrarNotaFiscal']);
-    Route::get('/listar-nota-fiscal', [NotaFiscalController::class, 'listarNotaFiscal']);
-    Route::post('/excluindo-nota-fiscal', [ColaboradorController::class, 'excluirNotaFiscal']);
+    Route::post('/creating-category', [CollaboratorController::class, 'createdCategory']);
+    Route::post('/deleting-category', [CollaboratorController::class, 'deleteCategory']);
+    Route::post('/edit-category/editing', [CollaboratorController::class, 'editCategory']);
+    Route::get('/list-all-category', [CategoryController::class, 'listAllCategory']);
+    Route::get('/list-active-category', [CategoryController::class, 'listActiveCategory']);
+
+    Route::post('/edit-mei/editing', [CollaboratorController::class, 'editMei']);
+    Route::get('/list-mei', [MeiController::class, 'listMei']);
+
 
 
 
 });
 
 
- /**
- * Rotas somente para ADMINISTRADOR (Precisa está logado)
+/**
+ * Administrator Routes
  */
-Route::group(['prefix' => 'administrador', 'middleware' => 'VerificaSeUsuarioLogado',  'middleware' => 'VerificaSeUsuarioAdministrador'], function () {
+Route::group(['prefix' => 'administrator', 'middleware' => 'VerificaSeUsuarioLogado',  'middleware' => 'VerificaSeUsuarioAdministrador'], function () {
 
     /**
      * ROTAS
      */
-    Route::get('/painel', [RotasController::class, 'irPainel']);
+    Route::get('/dashboard', [RoutesController::class, 'goDashboard']);
 
-    Route::get('/cadastro-nota-fiscal', [RotasController::class, 'irCadastroNotaFiscal']);
-    Route::get('/controle-nota-fiscal', [RotasController::class, 'irControleNotaFiscal']);
-    Route::get('/editar-nota-fiscal', [RotasController::class, 'irEditarNotaFiscal']);
+    Route::get('/company-create', [RoutesController::class, 'goCompanyCreate']);
+    Route::get('/company-control', [RoutesController::class, 'goCompanyControl']);
+    Route::get('/edit-company/{codhash}', [RoutesController::class, 'goCompanyEdit']);
 
+    Route::get('/category-create', [RoutesController::class, 'goCategoryCreate']);
+    Route::get('/category-control', [RoutesController::class, 'goCategoryControl']);
+    Route::get('/edit-category/{codhash}', [RoutesController::class, 'goCategoryEdit']);
 
-    Route::get('/cadastro-empresa', [RotasController::class, 'irCadastroEmpresa']);
-    Route::get('/controle-empresa', [RotasController::class, 'irControleEmpresa']);
-
-
+    Route::get('/mei-control', [RoutesController::class, 'goMeiControl']);
+    Route::get('/edit-mei/{codhash}', [RoutesController::class, 'goMeiEdit']);
 
     /**
      * EXECUÇOES
      */
-    Route::post('/cadastrando-empresa', [AdministradorController::class, 'cadastrarEmpresa']);
-    Route::post('/excluindo-empresa', [AdministradorController::class, 'excluirEmpresa']);
-    Route::get('/listar-empresa', [EmpresaController::class, 'listarEmpresa']);
+    Route::post('/creating-company', [AdministratorController::class, 'createdCompany']);
+    Route::post('/deleting-company', [AdministratorController::class, 'deleteCompany']);
+    Route::post('/edit-company/editing', [AdministratorController::class, 'editCompany']);
+    Route::get('/list-company', [CompanyController::class, 'listCompany']);
 
-    Route::post('/cadastrando-nota-fiscal', [AdministradorController::class, 'cadastrarNotaFiscal']);
-    Route::get('/listar-nota-fiscal', [NotaFiscalController::class, 'listarNotaFiscal']);
-    Route::post('/excluindo-nota-fiscal', [AdministradorController::class, 'excluirNotaFiscal']);
+    Route::post('/creating-category', [AdministratorController::class, 'createdCategory']);
+    Route::post('/deleting-category', [AdministratorController::class, 'deleteCategory']);
+    Route::post('/edit-category/editing', [AdministratorController::class, 'editCategory']);
+    Route::get('/list-all-category', [CategoryController::class, 'listAllCategory']);
+    Route::get('/list-active-category', [CategoryController::class, 'listActiveCategory']);
 
-
+    Route::post('/edit-mei/editing', [AdministratorController::class, 'editMei']);
+    Route::get('/list-mei', [MeiController::class, 'listMei']);
 
 });
 
@@ -103,12 +118,12 @@ Route::group(['prefix' => 'administrador', 'middleware' => 'VerificaSeUsuarioLog
  */
 View::composer('*', function ($view) {
 
-     $view->with('ATIVO', 1);
-     $view->with('PERFIL_COLABORADOR', PerfilController::$PERFIL_COLABORADOR);
-     $view->with('PERFIL_ADMINISTRADOR', PerfilController::$PERFIL_ADMINISTRADOR);
+     $view->with('ACTIVE', 1);
+     $view->with('PROFILE_COLLABORATOR', ProfileController::$PROFILE_COLLABORATOR);
+     $view->with('PROFILE_ADMINISTRATOR', ProfileController::$PROFILE_ADMINISTRATOR);
  
-     if (!empty(Session::get('usuario'))) {
-         $view->with('PREFIXO', strtolower(session()->get('usuario')[0]->perfil->perfil));
+     if (!empty(Session::get('user'))) {
+         $view->with('PREFIX', strtolower(session()->get('user')[0]->profile->profile));
      }
  
  });

@@ -20,7 +20,7 @@ class User extends Model
     protected $fillable = ['id', 'id_profile', 'name', 'email', 'password', 'phone', 'alert', 'active', 'codhash'];
 
     public function profile(){
-        return $this->belongsTo(Perfil::class, 'id_profile');
+        return $this->belongsTo(Profile::class, 'id_profile');
     }
 
     public function log_users(){

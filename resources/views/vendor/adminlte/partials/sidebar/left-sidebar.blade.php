@@ -16,7 +16,7 @@
                 <img src="{{  URL::asset('img/user.png') }}" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="{{ URL('/') }}/{{ $PREFIXO }}/painel" class="d-block">{{Session::get('usuario')[0]->nome_completo}}</a>
+                <a href="{{ URL('/') }}/{{ $PREFIX }}/dashboard" class="d-block">{{Session::get('user')[0]->name}}</a>
             </div>
         </div>
 
@@ -24,113 +24,97 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu">
 
                 <li class="nav-header">
-
-                    Nofa Fiscal
-
-                </li>
-
-                <li class="nav-item">
-
-                    <a class="nav-link" href="{{ URL('/') }}/{{ $PREFIXO }}/cadastro-nota-fiscal">
-
-                        <i class="fas fa-fw fa-user"></i>
-
-                        <p>
-                            Cadastrar
-
-                        </p>
-
-                    </a>
-
-                </li>
-
-                <li class="nav-item">
-
-                    <a class="nav-link" href="{{ URL('/') }}/{{ $PREFIXO }}/controle-nota-fiscal">
-
-                        <i class="fas fa-fw fa-user"></i>
-
-                        <p>
-                            Controle
-
-                        </p>
-
-                    </a>
-
-                </li>
-
-                <li class="nav-header">
-
                     Empresa
-
                 </li>
-
                 <li class="nav-item">
-
-                    <a class="nav-link" href="{{ URL('/') }}/{{ $PREFIXO }}/cadastro-empresa">
-
+                    <a class="nav-link" href="{{ URL('/') }}/{{ $PREFIX }}/company-create">
                         <i class="fas fa-fw fa-user"></i>
-
                         <p>
-                            Cadastrar
-
+                            Cadastrar Empresa
                         </p>
-
                     </a>
-
                 </li>
-
                 <li class="nav-item">
-
-                    <a class="nav-link" href="{{ URL('/') }}/{{ $PREFIXO }}/controle-empresa">
-
+                    <a class="nav-link" href="{{ URL('/') }}/{{ $PREFIX }}/company-control">
                         <i class="fas fa-fw fa-user"></i>
-
                         <p>
-                            Controle
-
+                            Controle de Empresa
                         </p>
-
                     </a>
-
                 </li>
 
                 <li class="nav-header">
-
-                    Usuário
-
+                    Categoria
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ URL('/') }}/{{ $PREFIX }}/category-create">
+                        <i class="fas fa-fw fa-user"></i>
+                        <p>
+                            Cadastrar Categoria
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ URL('/') }}/{{ $PREFIX }}/category-control">
+                        <i class="fas fa-fw fa-user"></i>
+                        <p>
+                            Controle de Categoria
+                        </p>
+                    </a>
                 </li>
 
+                <li class="nav-header">
+                    MEI
+                </li>
                 <li class="nav-item">
-
-                    <a class="nav-link" href="http://127.0.0.1:8000/admin/settings">
-
+                    <a class="nav-link" href="{{ URL('/') }}/{{ $PREFIX }}/mei-control">
                         <i class="fas fa-fw fa-user"></i>
+                        <p>
+                            Controle de MEI
+                        </p>
+                    </a>
+                </li>
 
+                <li class="nav-header">
+                    Nofa Fiscal
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ URL('/') }}/{{ $PREFIX }}/cadastro-nota-fiscal">
+                        <i class="fas fa-fw fa-user"></i>
+                        <p>
+                            Cadastrar Nofa Fiscal
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ URL('/') }}/{{ $PREFIX }}/controle-nota-fiscal">
+                        <i class="fas fa-fw fa-user"></i>
+                        <p>
+                            Controle de Nota Fiscal
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-header">
+                    Usuário
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="http://127.0.0.1:8000/admin/settings">
+                        <i class="fas fa-fw fa-user"></i>
                         <p>
                             Cadastrar
-
                         </p>
-
                     </a>
-
                 </li>
 
                 <li class="nav-item">
-
                     <a class="nav-link" href="http://127.0.0.1:8000/admin/settings">
-
                         <i class="fas fa-fw fa-user"></i>
-
                         <p>
                             Controle
-
                         </p>
-
                     </a>
-
                 </li>
-
             </ul>
         </nav>
     </div>
