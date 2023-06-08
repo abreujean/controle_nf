@@ -29,8 +29,6 @@ $( "#login_form" ).on( "submit", function( event ) {
         password: $("#password").val()
     };
 
-    console.log(data);
-
     const Toast = Swal.mixin({
         toast: true,
         position: "top-end",

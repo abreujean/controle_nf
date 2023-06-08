@@ -110,7 +110,7 @@
     <div class="card">
       <div class="card-header border-0">
         <div class="d-flex justify-content-between">
-          <h3 class="card-title">Valores Receita / Despesas</h3>
+          <h3 class="card-title">Valores Receita x Despesas</h3>
           <a href="javascript:void(0);"></a>
         </div>
       </div>
@@ -118,7 +118,7 @@
         <div class="d-flex">
           <p class="d-flex flex-column">
             <!--span class="text-bold text-lg">$18,230.00</span-->
-            <span>Receita / Despesas</span>
+            <span>Receita x Despesas</span>
           </p>
           <p class="ml-auto d-flex flex-column text-right">
             <span class="text-success">

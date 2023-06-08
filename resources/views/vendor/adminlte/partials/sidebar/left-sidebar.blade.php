@@ -64,13 +64,21 @@
                 </li>
 
                 <li class="nav-header">
-                    MEI
+                    Nofa Fiscal
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ URL('/') }}/{{ $PREFIX }}/mei-control">
+                    <a class="nav-link" href="{{ URL('/') }}/{{ $PREFIX }}/invoice-create">
                         <i class="fas fa-fw fa-arrow-circle-right"></i>
                         <p>
-                            Controle de MEI
+                            Cadastrar Nota Fiscal
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ URL('/') }}/{{ $PREFIX }}/invoice-control">
+                        <i class="fas fa-fw fa-arrow-circle-right"></i>
+                        <p>
+                            Controle de Nota Fiscal
                         </p>
                     </a>
                 </li>
@@ -95,22 +103,15 @@
                     </a>
                 </li>
 
+                
                 <li class="nav-header">
-                    Nofa Fiscal
+                    MEI
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ URL('/') }}/{{ $PREFIX }}/invoice-create">
+                    <a class="nav-link" href="{{ URL('/') }}/{{ $PREFIX }}/mei-control">
                         <i class="fas fa-fw fa-arrow-circle-right"></i>
                         <p>
-                            Cadastrar Nota Fiscal
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ URL('/') }}/{{ $PREFIX }}/invoice-control">
-                        <i class="fas fa-fw fa-arrow-circle-right"></i>
-                        <p>
-                            Controle de Nota Fiscal
+                            Controle de MEI
                         </p>
                     </a>
                 </li>

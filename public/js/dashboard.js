@@ -218,6 +218,8 @@ const salesChart = async (year) => {
 
   'use strict'
 
+  
+
   var ticksStyle = {
     fontColor: '#495057',
     fontStyle: 'bold'
@@ -227,6 +229,7 @@ const salesChart = async (year) => {
   var intersect = true
 
   var $salesChart = $('#sales-chart')
+
   // eslint-disable-next-line no-unused-vars
   var salesChart = new Chart($salesChart, {
     type: 'bar',
@@ -291,6 +294,7 @@ const visitorsChart = async (year) => {
 
   'use strict'
 
+
   var ticksStyle = {
     fontColor: '#495057',
     fontStyle: 'bold'
@@ -300,6 +304,7 @@ const visitorsChart = async (year) => {
   var intersect = true
 
   var $visitorsChart = $('#visitors-chart')
+
   // eslint-disable-next-line no-unused-vars
   var visitorsChart = new Chart($visitorsChart, {
     data: {
