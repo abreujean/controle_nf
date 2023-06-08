@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 
 class MeiController extends Controller
 {
+
+    public static $FIRST_REGISTER = 1;
+
+
     /**
      * Function to list mei in system
      * @return JsonResponse
@@ -45,5 +49,17 @@ class MeiController extends Controller
     public function updateMei($codhash, $max_value ) : void
     {
         Mei::where('codhash', $codhash)->update(['max_value' => $max_value]);
+    }
+
+
+    /**
+     * Function to retrieve mei data.
+     * @param $codhash
+     * @return float
+     */
+    public function recoverMaxValueMeiData() : string
+    {
+        $mei = mei::where('id', MeiController::$FIRST_REGISTER)->get();
+        return $mei[0]->max_value;
     }
 }

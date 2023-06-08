@@ -65,6 +65,7 @@
 
 @section('js')
 
+<!-- inputmask -->
 <script src="{{ asset('vendor/inputmask/inputmask.min.js')}}"></script>
 <script src="{{ asset('vendor/inputmask/inputmask.binding.js')}}"></script>
 

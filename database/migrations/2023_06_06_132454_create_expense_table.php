@@ -33,6 +33,7 @@ return new class extends Migration
             $table->foreign('id_category')->references('id')->on('category');
             
             $table->string('value', 100);
+            $table->string('expense', 100);
             $table->date('competition_date');
             $table->date('receipt_date');
             $table->string('codhash', 100);

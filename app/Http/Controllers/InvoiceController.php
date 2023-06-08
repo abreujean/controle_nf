@@ -19,66 +19,106 @@ class InvoiceController extends Controller
 
 
     /**
-     * Função para verificar se numero nf já foi cadastrado
-     * @param placa
-     * @return boolean
-     */
-    public function validarSeNumeroNfestaCadastrado($numero): bool
+    * Function to register new invoice
+    * @param 
+    * @return object
+    */
+    public function newInvoice($id_user, $id_company, $number, $value, $month_competency, $receipt_date): object
     {
-        $notaFiscal = Invoice::where('numero', $numero)->get();
-        return isset($notaFiscal[0]->cnpj) ? true : false;
-    }
-
-
-    /**
-     * Função para registrar nova nota fiscal no sistema.
-     * @param 
-     * @return object
-     */
-    public function novoNotaFiscal($id_usuario, $id_empresa, $numero, $valor, $mes_competencia, $mes_caixa): object
-    {
-        $notaFiscal = NotaFiscal::create([
-            'id_usuario' => $id_usuario,
-            'id_empresa' => $id_empresa,
-            'numero' => $numero,
-            'valor' => $valor,
-            'mes_competencia' => $mes_competencia,
-            'mes_caixa' => $mes_caixa,
+        $invoice = Invoice::create([
+            'id_user' => $id_user,
+            'id_company' => $id_company,
+            'number' => $number,
+            'value' => $value,
+            'month_competency' => $month_competency,
+            'receipt_date' => $receipt_date,
             'codhash' => Uuid::uuid4(),
         ]);
-
-        return $notaFiscal;
+ 
+        return $invoice;
     }
-
-
+ 
+ 
     /**
-     * Função para listar todas as notas fiscais no sistema
-     * @return JsonResponse
-     */
-    public function listarNotaFiscal(): array
-    {
-        $lista = DB::select('SELECT nf.id, nf.numero, nf.valor, DATE_FORMAT(nf.mes_competencia, "%m/%Y") AS mes_competencia, DATE_FORMAT(nf.mes_caixa, "%m/%Y") AS mes_caixa, nf.codhash, e.razao_social, e.cnpj FROM nota_fiscal nf INNER JOIN empresa e on nf.id_empresa = e.id ORDER BY nf.id ASC');
-        return $lista;
-    }
-
-    /**
-     * Função para recuperar id da nota fiscal pelo codhash
+     * Function to check there is registration of number invoice
      * @param placa
      * @return boolean
      */
-    public function recuperarIDPeloCodHashNotaFiscal($codhash): int
+    public function validateIfNumberInvoiceIsRegistered($number): bool
     {
-        $notaFiscal = NotaFiscal::where('codhash', $codhash)->get();
-        return $notaFiscal[0]->id;
+        $invoice = Invoice::where('number', $number)->get();
+        return isset($invoice[0]->number) ? true : false;
     }
-
+ 
     /**
-     * Função para excluir nota fiscal
+     * Function to list invoice in system
+     * @return JsonResponse
+     */
+    public function listInvoice(): object
+    {
+        $invoice = Invoice::with('company')->get();
+ 
+        return $invoice;
+    }
+ 
+    /**
+     * Function to retrieve invoice id by codhash
+     * @param placa
+     * @return boolean
+     */
+    public function recoverIDByCodHashInvoice($codhash): int
+    {
+        $invoice = Invoice::where('codhash', $codhash)->get();
+        return $invoice[0]->id;
+    }
+ 
+ 
+    /**
+     * Função para excluir invoice
      * @param $id
      * @return void
      */
-    public function excluirNotaFiscal($id) : void {
-        NotaFiscal::where(['id' => $id])->delete();
+    public function deleteInvoice($id) : void {
+        Invoice::where(['id' => $id])->delete();
+    }
+ 
+ 
+    /**
+     * Function to retrieve Invoice data.
+     * @param $codhash
+     * @return object
+     */
+    public function recoverInvoiceDataByCodhash($codhash) : object
+    {
+        $invoice = Invoice::where('codhash', $codhash)->get();
+        return $invoice;
+    }
+ 
+ 
+    /**
+     * Function to validate if Number invoice belongs to another invoice.
+     * @param $invoice
+     * @param $codhash
+     */
+    public function validateIfNumberInvoicebelongsToAnotherInvoice($number, $codhash) : bool {
+        $value = Invoice::where('number', $number)->where('codhash', '!=', $codhash)->get();
+        return isset($value[0]->number) ? true : false;
+    }
+ 
+ 
+    /**
+     * Function to update invoice data.
+     */
+    public function updateInvoice($codhash, $id_company, $number, $value, $month_competency, $receipt_date) : void
+    {
+        Invoice::where('codhash', $codhash)
+                ->update([
+                          'id_company' => $id_company,
+                          'number' => $number,
+                          'value' => $value,
+                          'month_competency' => $month_competency,
+                          'receipt_date' => $receipt_date,
+                        ]);
     }
 
 }

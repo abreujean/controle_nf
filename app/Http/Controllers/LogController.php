@@ -17,6 +17,7 @@ class LogController extends Controller
     public static $PESQUISAR = "PESQUISOU";
     public static $ENVIAR = "ENVIOU";
     public static $VINCULAR = "VINCULOU";
+    public static $DESABILITAR = "DESABILITOU";
 
     /**
      * Fuction to record log user in sistem .

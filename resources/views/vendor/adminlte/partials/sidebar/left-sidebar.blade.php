@@ -76,18 +76,38 @@
                 </li>
 
                 <li class="nav-header">
-                    Nofa Fiscal
+                    Despesas
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ URL('/') }}/{{ $PREFIX }}/cadastro-nota-fiscal">
+                    <a class="nav-link" href="{{ URL('/') }}/{{ $PREFIX }}/expense-create">
                         <i class="fas fa-fw fa-user"></i>
                         <p>
-                            Cadastrar Nofa Fiscal
+                            Cadastrar Despesas
                         </p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ URL('/') }}/{{ $PREFIX }}/controle-nota-fiscal">
+                    <a class="nav-link" href="{{ URL('/') }}/{{ $PREFIX }}/expense-control">
+                        <i class="fas fa-fw fa-user"></i>
+                        <p>
+                            Controle de Despesas
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-header">
+                    Nofa Fiscal
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ URL('/') }}/{{ $PREFIX }}/invoice-create">
+                        <i class="fas fa-fw fa-user"></i>
+                        <p>
+                            Cadastrar Nota Fiscal
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ URL('/') }}/{{ $PREFIX }}/invoice-control">
                         <i class="fas fa-fw fa-user"></i>
                         <p>
                             Controle de Nota Fiscal

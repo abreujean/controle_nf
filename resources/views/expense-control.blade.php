@@ -11,7 +11,7 @@
 
 @section('content_header')
 
-<h1>Controle Categoria</h1>
+<h1>Controle Despesas</h1>
 
 @endsection
 
@@ -22,7 +22,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">Categorias Cadastradas</h3>
+                    <h3 class="card-title">Despesas Cadastradas</h3>
                 </div>
 
                 <div class="card-body">
@@ -33,12 +33,15 @@
                         </div>
                         <div class="row">
                             <div class="col-sm-12">
-                                <table id="table-category" class="table table-bordered table-hover dataTable dtr-inline" aria-describedby="example2_info">
+                                <table id="table-expense" class="table table-bordered table-hover dataTable dtr-inline" aria-describedby="example2_info">
                                     <thead>
                                         <tr>
-                                            <th class="sorting sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Categoria</th>
-                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">Descrição</th>
-                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">Ativo</th>
+                                            <th class="sorting sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Despesa</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">Valor</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">Categoria</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">Empresa</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">Data Competência</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">Data Recebimento</th>
                                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending">Ações</th>
                                         </tr>
                                     </thead>
@@ -48,10 +51,13 @@
                                     </tbody>
                                     <tfoot>
                                         <tr>
+                                            <th rowspan="1" colspan="1">Despesa</th>
+                                            <th rowspan="1" colspan="1">Valor</th>
                                             <th rowspan="1" colspan="1">Categoria</th>
-                                            <th rowspan="1" colspan="1">Descrição</th>
-                                            <th rowspan="1" colspan="1">Ativo</th>
-                                            <th rowspan="1" colspan="1">Ações(s)</th>
+                                            <th rowspan="1" colspan="1">Empresa</th>
+                                            <th rowspan="1" colspan="1">Data Competência</th>
+                                            <th rowspan="1" colspan="1">Data Recebimento</th>
+                                            <th rowspan="1" colspan="1">Ações</th>
                                         </tr>
                                     </tfoot>
                                 </table>
@@ -76,13 +82,13 @@
 
 <!-- sweetalert2 -->
 <script src="{{ asset('vendor/sweetalert2/sweetalert2.min.js')}}"></script>
-
-<script src="{{ asset('js/category.js?') . date('dmYHis') }}"></script>
-
+<!-- datatables -->
 <script src="{{ asset('vendor/datatables/js/jquery.dataTables.min.js')}}"></script>
 <script src="{{ asset('vendor/datatables/js/dataTables.bootstrap4.min.js')}}"></script>
 <script src="{{ asset('vendor/datatables/js/dataTables.buttons.min.js')}}"></script>
 <script src="{{ asset('vendor/datatables/js/buttons.bootstrap4.min.js')}}"></script>
-
-
+<!-- moment -->
+<script src="{{ asset('vendor/moment/moment.min.js')}}"></script>
+<!-- myJS -->
+<script src="{{ asset('js/expense.js?') . date('dmYHis') }}"></script>
 @endsection

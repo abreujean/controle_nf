@@ -11,6 +11,9 @@ class RoutesController extends Controller
     public $companyController;
     public $categoryController;
     public $meiController;
+    public $expenseController;
+    public $invoiceController;
+    public $graphicController;
 
 
     public function __construct()
@@ -18,6 +21,10 @@ class RoutesController extends Controller
         $this->companyController = new CompanyController();    
         $this->categoryController = new CategoryController();    
         $this->meiController = new MeiController();    
+        $this->expenseController = new ExpenseController();    
+        $this->invoiceController = new InvoiceController(); 
+        $this->graphicController = new GraphicController();
+
     }
 
     public function logout()
@@ -33,7 +40,8 @@ class RoutesController extends Controller
 
     public function goDashboard(){
         
-        return view('dashboard');
+        $listRegisteredInvoiceYears = $this->graphicController->listRegisteredInvoiceYears();
+        return view('dashboard', compact('listRegisteredInvoiceYears'));
     }
 
 
@@ -79,6 +87,46 @@ class RoutesController extends Controller
     }
 
     
+    public function goExpenseCreate(){
+        $listCompany = $this->companyController->listCompany();
+        $listActiveCategory = $this->categoryController->listActiveCategory();
+
+        return view('expense-create', compact('listCompany', 'listActiveCategory'));
+    }
+
+    public function goExpenseControl(){
+        return view('expense-control');
+    }
+
+    public function goExpenseEdit($codhash){
+
+        $recoverExpenseDataByCodhash = $this->expenseController->recoverExpenseDataByCodhash($codhash);
+        $listCompany = $this->companyController->listCompany();
+        $listActiveCategory = $this->categoryController->listActiveCategory();
+
+        return view('expense-edit', compact('recoverExpenseDataByCodhash', 'listCompany', 'listActiveCategory'));
+    }
+
+
+    public function goInvoiceCreate(){
+        $listCompany = $this->companyController->listCompany();
+
+        return view('invoice-create', compact('listCompany'));
+    }
+
+    public function goInvoiceControl(){
+        return view('invoice-control');
+    }
+
+    public function goInvoiceEdit($codhash){
+
+        $recoverInvoiceDataByCodhash = $this->invoiceController->recoverInvoiceDataByCodhash($codhash);
+        $listCompany = $this->companyController->listCompany();
+        $listActiveCategory = $this->categoryController->listActiveCategory();
+
+        return view('invoice-edit', compact('recoverInvoiceDataByCodhash', 'listCompany', 'listActiveCategory'));
+    }
+
   /*  public function irCadastroNotaFiscal(){
 
         $listCompany = $this->companyController->listCompany();

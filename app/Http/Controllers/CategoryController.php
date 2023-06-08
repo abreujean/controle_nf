@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Expense;
 use Illuminate\Http\Request;
 use Ramsey\Uuid\Uuid;
 
@@ -10,6 +11,9 @@ class CategoryController extends Controller
 {
 
     public static $ACTIVE = 1;
+    public static $DISABLE = 0;
+
+
      /**
      * Function to register new Category
      * @param 
@@ -56,7 +60,7 @@ class CategoryController extends Controller
      */
     public function listActiveCategory(): object
     {
-        $category = Category::where('active', CategoryController::$ACTIVE);
+        $category = Category::where('active', CategoryController::$ACTIVE)->get();
         return $category;
     }
 
@@ -74,12 +78,16 @@ class CategoryController extends Controller
 
 
     /**
-     * Função para excluir category
+     * Function to disable category
      * @param $id
      * @return void
      */
-    public function deleteCategory($id) : void {
-        Category::where(['id' => $id])->delete();
+    public function disableCategory($id) : void {
+
+        Category::where('id', $id)
+        ->update([
+                  'active' => CategoryController::$DISABLE,
+                ]);
     }
 
 

@@ -4,6 +4,9 @@ use App\Http\Controllers\AdministratorController;
 use App\Http\Controllers\CollaboratorController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ExpenseController;
+use App\Http\Controllers\GraphicController;
+use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\MeiController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoutesController;
@@ -34,7 +37,6 @@ Route::get('/recover-user-profile-logged', [ProfileController::class, 'recoverUs
 
  Route::group(['prefix' => 'collaborator', 'middleware' => 'VerificaSeUsuarioLogado',  'middleware' => 'VerificaSeUsuarioColaborador'], function () {
 
- 
     Route::get('/dashboard', [RoutesController::class, 'goDashboard']);
 
     Route::get('/company-create', [RoutesController::class, 'goCompanyCreate']);
@@ -48,6 +50,14 @@ Route::get('/recover-user-profile-logged', [ProfileController::class, 'recoverUs
     Route::get('/mei-control', [RoutesController::class, 'goMeiControl']);
     Route::get('/edit-mei/{codhash}', [RoutesController::class, 'goMeiEdit']);
 
+    Route::get('/expense-create', [RoutesController::class, 'goExpenseCreate']);
+    Route::get('/expense-control', [RoutesController::class, 'goExpenseControl']);
+    Route::get('/edit-expense/{codhash}', [RoutesController::class, 'goExpenseEdit']);
+
+    Route::get('/invoice-create', [RoutesController::class, 'goInvoiceCreate']);
+    Route::get('/invoice-control', [RoutesController::class, 'goInvoiceControl']);
+    Route::get('/edit-invoice/{codhash}', [RoutesController::class, 'goInvoiceEdit']);
+
 
     /**
      * EXECUÇOES
@@ -58,7 +68,7 @@ Route::get('/recover-user-profile-logged', [ProfileController::class, 'recoverUs
     Route::get('/list-company', [CompanyController::class, 'listCompany']);
 
     Route::post('/creating-category', [CollaboratorController::class, 'createdCategory']);
-    Route::post('/deleting-category', [CollaboratorController::class, 'deleteCategory']);
+    Route::post('/disabling-category', [CollaboratorController::class, 'disableCategory']);
     Route::post('/edit-category/editing', [CollaboratorController::class, 'editCategory']);
     Route::get('/list-all-category', [CategoryController::class, 'listAllCategory']);
     Route::get('/list-active-category', [CategoryController::class, 'listActiveCategory']);
@@ -66,8 +76,25 @@ Route::get('/recover-user-profile-logged', [ProfileController::class, 'recoverUs
     Route::post('/edit-mei/editing', [CollaboratorController::class, 'editMei']);
     Route::get('/list-mei', [MeiController::class, 'listMei']);
 
+    Route::post('/creating-expense', [CollaboratorController::class, 'createdExpense']);
+    Route::post('/deleting-expense', [CollaboratorController::class, 'deleteExpense']);
+    Route::post('/edit-expense/editing', [CollaboratorController::class, 'editExpense']);
+    Route::get('/list-expense', [ExpenseController::class, 'listExpense']);
 
+    Route::post('/creating-invoice', [CollaboratorController::class, 'createdInvoice']);
+    Route::post('/deleting-invoice', [CollaboratorController::class, 'deleteInvoice']);
+    Route::post('/edit-invoice/editing', [CollaboratorController::class, 'editInvoice']);
+    Route::get('/list-invoice', [InvoiceController::class, 'listInvoice']);
 
+    Route::get('/list-year-invoice', [GraphicController::class, 'listRegisteredInvoiceYears']);
+    Route::get('/count-invoices-years/{year}', [GraphicController::class, 'countAllInvoicesByYears']);
+    Route::get('/sum-value-invoices-years/{year}', [GraphicController::class, 'sumValueAllInvoicesByYears']);
+    Route::get('/sum-value-expense-years/{year}', [GraphicController::class, 'sumValueAllExpenseByYears']);
+    Route::get('/retrieve-available-billing-amount/{year}', [GraphicController::class, 'retrieveAvailableBillingAmount']);
+    Route::get('/list-sum-month-invoice/{year}', [GraphicController::class, 'listSumMonthInvoiceByYear']);
+    Route::get('/list-sum-month-expense/{year}', [GraphicController::class, 'listSumMonthExpenseByYear']);
+    Route::get('/simple-balance-invoice-expense/{year}', [GraphicController::class, 'simpleBalanceInvoiceAndExpenseByYear']);
+    Route::get('/sum-expenses-for-category/{year}', [GraphicController::class, 'sumExpensesCategoryByYear']);
 
 });
 
@@ -92,6 +119,14 @@ Route::group(['prefix' => 'administrator', 'middleware' => 'VerificaSeUsuarioLog
 
     Route::get('/mei-control', [RoutesController::class, 'goMeiControl']);
     Route::get('/edit-mei/{codhash}', [RoutesController::class, 'goMeiEdit']);
+    
+    Route::get('/expense-create', [RoutesController::class, 'goExpenseCreate']);
+    Route::get('/expense-control', [RoutesController::class, 'goExpenseControl']);
+    Route::get('/edit-expense/{codhash}', [RoutesController::class, 'goExpenseEdit']);
+
+    Route::get('/invoice-create', [RoutesController::class, 'goInvoiceCreate']);
+    Route::get('/invoice-control', [RoutesController::class, 'goInvoiceControl']);
+    Route::get('/edit-invoice/{codhash}', [RoutesController::class, 'goInvoiceEdit']);
 
     /**
      * EXECUÇOES
@@ -102,13 +137,33 @@ Route::group(['prefix' => 'administrator', 'middleware' => 'VerificaSeUsuarioLog
     Route::get('/list-company', [CompanyController::class, 'listCompany']);
 
     Route::post('/creating-category', [AdministratorController::class, 'createdCategory']);
-    Route::post('/deleting-category', [AdministratorController::class, 'deleteCategory']);
+    Route::post('/disabling-category', [AdministratorController::class, 'disableCategory']);
     Route::post('/edit-category/editing', [AdministratorController::class, 'editCategory']);
     Route::get('/list-all-category', [CategoryController::class, 'listAllCategory']);
     Route::get('/list-active-category', [CategoryController::class, 'listActiveCategory']);
 
     Route::post('/edit-mei/editing', [AdministratorController::class, 'editMei']);
     Route::get('/list-mei', [MeiController::class, 'listMei']);
+
+    Route::post('/creating-expense', [AdministratorController::class, 'createdExpense']);
+    Route::post('/deleting-expense', [AdministratorController::class, 'deleteExpense']);
+    Route::post('/edit-expense/editing', [AdministratorController::class, 'editExpense']);
+    Route::get('/list-expense', [ExpenseController::class, 'listExpense']);
+
+    Route::post('/creating-invoice', [AdministratorController::class, 'createdInvoice']);
+    Route::post('/deleting-invoice', [AdministratorController::class, 'deleteInvoice']);
+    Route::post('/edit-invoice/editing', [AdministratorController::class, 'editInvoice']);
+    Route::get('/list-invoice', [InvoiceController::class, 'listInvoice']);
+
+    Route::get('/list-year-invoice', [GraphicController::class, 'listRegisteredInvoiceYears']);
+    Route::get('/count-invoices-years/{year}', [GraphicController::class, 'countAllInvoicesByYears']);
+    Route::get('/sum-value-invoices-years/{year}', [GraphicController::class, 'sumValueAllInvoicesByYears']);
+    Route::get('/sum-value-expense-years/{year}', [GraphicController::class, 'sumValueAllExpenseByYears']);
+    Route::get('/retrieve-available-billing-amount/{year}', [GraphicController::class, 'retrieveAvailableBillingAmount']);
+    Route::get('/list-sum-month-invoice/{year}', [GraphicController::class, 'listSumMonthInvoiceByYear']);
+    Route::get('/list-sum-month-expense/{year}', [GraphicController::class, 'listSumMonthExpenseByYear']);
+    Route::get('/simple-balance-invoice-expense/{year}', [GraphicController::class, 'simpleBalanceInvoiceAndExpenseByYear']);
+    Route::get('/sum-expenses-for-category/{year}', [GraphicController::class, 'sumExpensesCategoryByYear']);
 
 });
 

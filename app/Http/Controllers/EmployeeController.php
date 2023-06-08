@@ -146,12 +146,12 @@ abstract class EmployeeController extends UserController
         try{
 
             //I can only exclude company if there is no link with the invoice
-            if($this->invoiceController->checkIfThereisVinculationCompanyById( $this->companyController->recoverCompanyDataByCodhash($request->codhash))){
+            if($this->invoiceController->checkIfThereisVinculationCompanyById( $this->companyController->recoverIDByCodHashCompany($request->codhash))){
                 throw new \Exception("Você não pode excluir uma empresa que está vinculada a uma nota fiscal.");
             }
 
             //I can only exclude company if there is no link with the expense
-            if($this->expenseController->checkIfThereisVinculationCompanyById( $this->companyController->recoverCompanyDataByCodhash($request->codhash))){
+            if($this->expenseController->checkIfThereisVinculationCompanyById( $this->companyController->recoverIDByCodHashCompany($request->codhash))){
                 throw new \Exception("Você não pode excluir uma empresa que está vinculada a uma despesa.");
             }
 
@@ -237,6 +237,35 @@ abstract class EmployeeController extends UserController
     }
 
     /**
+     * Function to disable Category
+     * @param $request
+     * @return JsonResponse
+     */
+    protected function disableCategory(Request $request) : JsonResponse {
+
+        try{
+
+            //I can only exclude Category if there is no link with the category
+            if($this->expenseController->checkIfThereisVinculationCategoryById( $this->categoryController->recoverIDByCodHashCategory($request->codhash))){
+                throw new \Exception("Você não pode desativar uma categoria que está vinculada a uma despesa.");
+            }
+
+            $this->categoryController->disableCategory($this->categoryController->recoverIDByCodHashCategory($request->codhash));
+
+            /**
+            * Log de Usuário
+            */
+            $this->logController->newLog(session()->get('user')[0]->id, LogController::$DESABILITAR, ' uma Categoria no sistema');
+
+            return response()->json('Categoria foi desabilitada com sucesso !', 200);
+
+        }catch(\Exception $e){
+            return response()->json($e->getMessage(), 400);
+        }
+
+    }
+
+    /**
      * Function to edit Mei
      * @param Request $request
      * @return JsonResponse
@@ -262,45 +291,123 @@ abstract class EmployeeController extends UserController
         }
     }
 
+
     /**
-     * Função para cadastrar nota fiscal
+     * Function to create expense
      * @param Request $request
      * @return JsonResponse
      */
-    protected function cadastrarNotaFiscal(Request $request) : JsonResponse
+    protected function createdExpense(Request $request) : JsonResponse
     {
-
-        //valor do campo "mes_caixa" e "mes_competencia" da requisição
-        $mesCaixa = $request->mes_caixa;
-        $mesCompetencia = $request->mes_competencia;
-
-        // Converte a string para uma data no formato adequado (AAAA-MM-01)
-        $mesCompetenciadataFormatada = Carbon::createFromFormat('m/Y', $mesCompetencia)->format('Y-m-01');
-        $mesCaixadataFormatada = Carbon::createFromFormat('m/Y', $mesCaixa)->format('Y-m-01');
-
+        
         try
         {               
-            //Verificar se a placa o cnpj está nop sistema
-            if($this->notaFiscalController->validarSeNumeroNfestaCadastrado($request->cnpj))
+            //Chech if there is expense register in system
+            /*if($this->expenseController->validateIfExpenseIsRegistered($request->expense))
             {
-                throw new \Exception('Número já cadastrado.');
-            }
+                throw new \Exception('Despesa já cadastrada!');
+            }*/
 
-            //Verificar se o mês de caixa é menos que o de competência
-            if($mesCaixadataFormatada < $mesCompetenciadataFormatada)
-            {
-                throw new \Exception('O mês de caixa não pode ser antes do mês de competência');
-            }
 
-            //Cadastra empresa no sistema
-            $notaFiscal = $this->notaFiscalController->novoNotaFiscal(session()->get('usuario')[0]->id, $request->id_empresa, $request->numero, $request->valor, $mesCompetenciadataFormatada, $mesCaixadataFormatada);
+            //Register expense in system
+            $expense = $this->expenseController->newExpense( session()->get('user')[0]->id, $request->id_company, $request->id_category, $request->value, $request->expense, date('Y-m-d', strtotime(str_replace('/', '-', $request->competition_date))) , date('Y-m-d', strtotime(str_replace('/', '-', $request->receipt_date))));
+
+            /**
+            * User log
+            */
+            $this->logController->newLog(session()->get('user')[0]->id, LogController::$CRIAR, ' uma nova Despesa no sistema cujo id identificador é ' . $expense->id);
+
+            return response()->json('Despesa foi criada com sucesso.', 200);
+
+        }catch (\Exception $e){
+            return response()->json($e->getMessage(), 400);
+        }
+
+    }
+
+    /**
+     * Function to edit expense
+     * @param Request $request
+     * @return JsonResponse
+     */
+    protected function editExpense(Request $request): JsonResponse
+    {
+        try{
+
+            //validate if expense is already registered
+
+            /*if($this->expenseController->validateIfExpensebelongsToAnotherExpense($request->expense, $request->codhash)){
+                throw new \Exception("Despesa " . substr($request->expense, 0, 10) . "*** já está registrado no sistema.");
+            }*/
+
+            /**
+             * update expense
+             */
+            $expense = $this->expenseController->updateExpense($request->codhash, $request->id_company, $request->id_category, $request->value, $request->expense, date('Y-m-d', strtotime(str_replace('/', '-', $request->competition_date))) , date('Y-m-d', strtotime(str_replace('/', '-', $request->receipt_date))));
+
+            /**
+             * User Log
+             */
+            $this->logController->newLog(session()->get('user')[0]->id, LogController::$ATUALIZAR, 'uma Despesa no sistema cujo id identificador é ' . $this->expenseController->recoverExpenseDataByCodhash($request->codhash)[0]->id);
+
+            return (response()->json("Despesa foi atualizada com sucesso.", 200));
+
+        }catch(\Exception $e){
+            return (response()->json($e->getMessage(), 400));
+        }
+    }
+
+    /**
+     * Function to delete expense
+     * @param $request
+     * @return JsonResponse
+     */
+    protected function deleteExpense(Request $request) : JsonResponse {
+
+        try{
+
+            $this->expenseController->deleteExpense($this->expenseController->recoverIDByCodHashExpense($request->codhash));
 
             /**
             * Log de Usuário
             */
-            $this->logController->gravarLog(session()->get('usuario')[0]->id, LogController::$CRIAR, ' uma nova Nota Fiscal no sistema cujo id identificador é ' . $notaFiscal->id);
+            $this->logController->newLog(session()->get('user')[0]->id, LogController::$EXCLUIR, ' uma Despesa no sistema');
 
-            return response()->json('Nota fiscal foi cadastrada com sucesso.', 200);
+            return response()->json('Despesa foi excluída com sucesso!', 200);
+
+        }catch(\Exception $e){
+            return response()->json($e->getMessage(), 400);
+        }
+
+    }
+
+
+    /**
+     * Function to create invoice
+     * @param Request $request
+     * @return JsonResponse
+     */
+    protected function createdInvoice(Request $request) : JsonResponse
+    {
+        
+        try
+        {               
+            //Chech if there is invoice register in system
+            if($this->invoiceController->validateIfNumberInvoiceIsRegistered($request->number))
+            {
+                throw new \Exception('Número da Nota Fiscal já cadastrada!');
+            }
+
+
+            //Register invoice in system
+            $invoice = $this->invoiceController->newInvoice( session()->get('user')[0]->id, $request->id_company, $request->number, $request->value, Carbon::createFromFormat('m/Y', $request->month_competency)->format('Y-m-01') , date('Y-m-d', strtotime(str_replace('/', '-', $request->receipt_date))));
+
+            /**
+            * User log
+            */
+            $this->logController->newLog(session()->get('user')[0]->id, LogController::$CRIAR, ' uma nova Nota Fical no sistema cujo id identificador é ' . $invoice->id);
+
+            return response()->json('Nota Fiscal foi cadastrada com sucesso.', 200);
 
         }catch (\Exception $e){
             return response()->json($e->getMessage(), 400);
@@ -310,26 +417,61 @@ abstract class EmployeeController extends UserController
 
 
     /**
-     * Função para excluir nota fiscal
+     * Function to edit invoice
+     * @param Request $request
+     * @return JsonResponse
+     */
+    protected function editInvoice(Request $request): JsonResponse
+    {
+        try{
+
+            //validate if invoice is already registered
+
+            if($this->invoiceController->validateIfNumberInvoicebelongsToAnotherInvoice($request->invoice, $request->codhash)){
+                throw new \Exception("Nota " . substr($request->invoice, 0, 10) . "*** já está registrada no sistema.");
+            }
+
+            /**
+             * update invoice
+             */
+            $invoice = $this->invoiceController->updateInvoice($request->codhash, $request->id_company, $request->number,  $request->value, Carbon::createFromFormat('m/Y', $request->month_competency)->format('Y-m-01') , date('Y-m-d', strtotime(str_replace('/', '-', $request->receipt_date))));
+
+            /**
+             * User Log
+             */
+            $this->logController->newLog(session()->get('user')[0]->id, LogController::$ATUALIZAR, 'uma Nota Fiscal no sistema cujo id identificador é ' . $this->invoiceController->recoverInvoiceDataByCodhash($request->codhash)[0]->id);
+
+            return (response()->json("Nota Fiscal foi atualizada com sucesso.", 200));
+
+        }catch(\Exception $e){
+            return (response()->json($e->getMessage(), 400));
+        }
+    }
+
+
+
+    /**
+     * Function to delete invoice
      * @param $request
      * @return JsonResponse
      */
-    protected function excluirNotaFiscal(Request $request) : JsonResponse {
+    protected function deleteInvoice(Request $request) : JsonResponse {
 
         try{
 
-            $this->notaFiscalController->excluirNotaFiscal($this->notaFiscalController->recuperarIDPeloCodHashNotaFiscal($request->codhash));
+            $this->invoiceController->deleteInvoice($this->invoiceController->recoverIDByCodHashInvoice($request->codhash));
 
             /**
             * Log de Usuário
             */
-            $this->logController->gravarLog(session()->get('usuario')[0]->id, LogController::$EXCLUIR, ' uma Nota Fiscal no sistema');
+            $this->logController->newLog(session()->get('user')[0]->id, LogController::$EXCLUIR, ' uma Nota Fiscal no sistema');
 
-            return response()->json('Nota Fiscal foi excluída com sucesso !', 200);
+            return response()->json('Nota Fiscal foi excluída com sucesso!', 200);
 
         }catch(\Exception $e){
             return response()->json($e->getMessage(), 400);
         }
 
     }
+    
 }
