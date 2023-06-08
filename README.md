@@ -1,5 +1,6 @@
 # Controle de nota fiscal
-Descrição breve do sistema.
+
+## Descrição breve do sistema.
 
 Funcionalidades
 Aqui estão algumas das funcionalidades principais do sistema:
@@ -46,11 +47,13 @@ Todo dia 01 do mês, é enviada uma notificação mensal de limite, informando o
 Ao atingir 80% do limite de faturamento anual do MEI, é enviado um alerta informando que o usuário está próximo de ser desenquadrado, juntamente com os procedimentos que deve adotar para evitar o pagamento de multas.
 
 ## Tecnologias Utilizadas
-O sistema foi desenvolvido utilizando as seguintes tecnologias:
+O sistema foi desenvolvido utilizando as seguintes 
 
+tecnologias:
 Linguagem de programação: PHP
 Framework: Laravel 10
 Banco de Dados: Mysql
+
 Outras tecnologias: 
 
 1. Implementação de requisições AJAX com jQuery para melhorar a interatividade das páginas.
@@ -61,10 +64,9 @@ Outras tecnologias:
 6. Criação de níveis de acesso para colaboradores e administradores, garantindo a segurança e privacidade dos dados
 
 ## Requisitos de Instalação
-Descreva aqui os requisitos necessários para executar o sistema localmente, como:
 
 Versão do PHP: 8.2.1
-Banco de Dados: 5.2.0
+Banco de Dados MySql: 5.2.0
 Outras dependências: bootstrap, chart.js, datatables, daterangepicker, fontawesome-free inputmask, jquery, jquery-ui, moment, selec2, sweetalert2
 
 ## Instalação e Configuração
