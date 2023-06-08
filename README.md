@@ -82,9 +82,9 @@ Outras dependências: bootstrap, chart.js, datatables, daterangepicker, fontawes
 
 <p float="left">
 
- <img src="https://git.vibbra.com.br/jean-1685398334/controle_nf/-/blob/main/public/img/ModeloER.PNG" width="200" />
+ <img src="img/ModeloER.PNG" width="200" />
 
- <img src="https://git.vibbra.com.br/jean-1685398334/controle_nf/-/blob/main/public/img/Passosdoprojeto.PNG" width="200" /> 
+ <img src="img/Passosdoprojeto.PNG" width="200" /> 
 
 </p>
 
