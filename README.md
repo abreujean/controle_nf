@@ -3,7 +3,11 @@
 ## Descrição breve do sistema.
 
 Funcionalidades
-Aqui estão algumas das funcionalidades principais do sistema:
+Link dos video de apresentação so sistema
+
+Parte 1 - https://www.youtube.com/watch?v=vojK04bnKFw
+
+Parte 2 - https://www.youtube.com/watch?v=K57NzcFjfRk
 
 1.Tela Principal:
 
@@ -119,17 +123,12 @@ Acesse o sistema no seu navegador:
 http://localhost:8000
 
 
-## Contribuição
-
-1. Caso queira contribuir para o desenvolvimento deste projeto, sinta-se à vontade para fazer um fork deste repositório e enviar suas melhorias através de pull requests.
-2. Certifique-se de seguir as boas práticas de desenvolvimento do Laravel e manter o código limpo e bem documentado.
-3. É sempre recomendado realizar testes unitários e de integração para garantir a qualidade e robustez da aplicação.
-
 ## Licença
 
 Este projeto está licenciado sob a [Licença MIT](https://opensource.org/licenses/MIT) - consulte o arquivo [LICENSE](LICENSE) para obter mais detalhes.
 
 
 ## Contato
+
 Jean Abreu - jeandcabreu@gmail.com
 
