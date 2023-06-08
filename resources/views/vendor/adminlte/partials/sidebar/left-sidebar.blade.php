@@ -16,7 +16,7 @@
                 <img src="{{  URL::asset('img/user.png') }}" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="{{ URL('/') }}/{{ $PREFIX }}/dashboard" class="d-block">{{Session::get('user')[0]->name}}</a>
+                <a href="{{ URL('/') }}/{{ $PREFIX }}/edit-user/{{Session::get('user')[0]->codhash}}" class="d-block">{{Session::get('user')[0]->name}}</a>
             </div>
         </div>
 
@@ -28,7 +28,7 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ URL('/') }}/{{ $PREFIX }}/company-create">
-                        <i class="fas fa-fw fa-user"></i>
+                        <i class="fas fa-fw fa-arrow-circle-right"></i>
                         <p>
                             Cadastrar Empresa
                         </p>
@@ -36,7 +36,7 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ URL('/') }}/{{ $PREFIX }}/company-control">
-                        <i class="fas fa-fw fa-user"></i>
+                        <i class="fas fa-fw fa-arrow-circle-right"></i>
                         <p>
                             Controle de Empresa
                         </p>
@@ -48,7 +48,7 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ URL('/') }}/{{ $PREFIX }}/category-create">
-                        <i class="fas fa-fw fa-user"></i>
+                        <i class="fas fa-fw fa-arrow-circle-right"></i>
                         <p>
                             Cadastrar Categoria
                         </p>
@@ -56,7 +56,7 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ URL('/') }}/{{ $PREFIX }}/category-control">
-                        <i class="fas fa-fw fa-user"></i>
+                        <i class="fas fa-fw fa-arrow-circle-right"></i>
                         <p>
                             Controle de Categoria
                         </p>
@@ -68,7 +68,7 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ URL('/') }}/{{ $PREFIX }}/mei-control">
-                        <i class="fas fa-fw fa-user"></i>
+                        <i class="fas fa-fw fa-arrow-circle-right"></i>
                         <p>
                             Controle de MEI
                         </p>
@@ -80,7 +80,7 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ URL('/') }}/{{ $PREFIX }}/expense-create">
-                        <i class="fas fa-fw fa-user"></i>
+                        <i class="fas fa-fw fa-arrow-circle-right"></i>
                         <p>
                             Cadastrar Despesas
                         </p>
@@ -88,7 +88,7 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ URL('/') }}/{{ $PREFIX }}/expense-control">
-                        <i class="fas fa-fw fa-user"></i>
+                        <i class="fas fa-fw fa-arrow-circle-right"></i>
                         <p>
                             Controle de Despesas
                         </p>
@@ -100,7 +100,7 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ URL('/') }}/{{ $PREFIX }}/invoice-create">
-                        <i class="fas fa-fw fa-user"></i>
+                        <i class="fas fa-fw fa-arrow-circle-right"></i>
                         <p>
                             Cadastrar Nota Fiscal
                         </p>
@@ -108,7 +108,7 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ URL('/') }}/{{ $PREFIX }}/invoice-control">
-                        <i class="fas fa-fw fa-user"></i>
+                        <i class="fas fa-fw fa-arrow-circle-right"></i>
                         <p>
                             Controle de Nota Fiscal
                         </p>
@@ -118,20 +118,20 @@
                 <li class="nav-header">
                     Usuário
                 </li>
-                <li class="nav-item">
+                <!--li class="nav-item">
                     <a class="nav-link" href="http://127.0.0.1:8000/admin/settings">
-                        <i class="fas fa-fw fa-user"></i>
+                        <i class="fas fa-fw fa-arrow-circle-right"></i>
                         <p>
                             Cadastrar
                         </p>
                     </a>
-                </li>
+                </li-->
 
                 <li class="nav-item">
-                    <a class="nav-link" href="http://127.0.0.1:8000/admin/settings">
-                        <i class="fas fa-fw fa-user"></i>
+                    <a class="nav-link" href="{{ URL('/') }}/{{ $PREFIX }}/edit-user/{{Session::get('user')[0]->codhash}}">
+                        <i class="fas fa-fw fa-arrow-circle-right"></i>
                         <p>
-                            Controle
+                            Configuração de Alerta
                         </p>
                     </a>
                 </li>

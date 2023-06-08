@@ -13,6 +13,7 @@ class AdministratorController extends EmployeeController
     public $categoryController;
     public $meiController;
 
+
     public function __construct()
     {
         $this->logController = new LogController();

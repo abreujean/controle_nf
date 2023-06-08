@@ -473,5 +473,43 @@ abstract class EmployeeController extends UserController
         }
 
     }
+
+
+    /**
+     * Function to edit User
+     * @param Request $request
+     * @return JsonResponse
+     */
+    protected function editUser(Request $request): JsonResponse
+    {
+        try{
+
+            //validate if email is already registered
+            //validate if phone is already registered
+
+            if($this->validateIfEmailbelongsToAnotherUser($request->email, $request->codhash)){
+                throw new \Exception("email " . substr($request->email, 0, 10) . "*** já está registrado no sistema.");
+            }
+
+            if($this->validateIfPhonebelongsToAnotherUser($request->phone, $request->codhash)){
+                throw new \Exception("Telefone " . substr($request->phone, 0, 10) . "*** já está registrada no sistema.");
+            }
+
+            /**
+             * update user
+             */
+            $user = $this->updateUser($request->codhash, $request->id_profile, $request->name, $request->email, $request->current_password, $request->password, $request->phone, $request->alert, $request->active);
+
+            /**
+             * User Log
+             */
+            $this->logController->newLog(session()->get('user')[0]->id, LogController::$ATUALIZAR, 'um usuárui no sistema cujo id identificador é ' . $this->recoverUserDataByCodhash($request->codhash)[0]->id);
+
+            return (response()->json("Usuárui foi atualizada com sucesso.", 200));
+
+        }catch(\Exception $e){
+            return (response()->json($e->getMessage(), 400));
+        }
+    }
     
 }

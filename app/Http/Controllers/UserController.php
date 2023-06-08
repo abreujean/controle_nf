@@ -9,8 +9,6 @@ use Illuminate\Http\Request;
 abstract class UserController extends Controller
 {
 
-    abstract function doLogin(Request $request) : JsonResponse;
-
     public static $ACTIVE = 1;
     
     /**
@@ -23,6 +21,19 @@ abstract class UserController extends Controller
         $user = User::where('email', $email)->get();
         return $user;
     }
+
+
+     /**
+     * Function to recover data from user by codhash.
+     * @param $codhash
+     * @return object
+     */
+    public function recoverUserDataByCodhash($codhash) : object
+    {
+        $user = User::where('codhash', $codhash)->get();
+        return $user;
+    }
+
 
     /**
      * Function to valid user login.
@@ -47,5 +58,45 @@ abstract class UserController extends Controller
     {
         $valor = User::where('email',$email)->get();
         return $valor[0]->active == UserController::$ACTIVE ? true : false;
+    }
+
+
+     /**
+     * Function to validate if email belongs to another company.
+     * @param $email
+     * @param $codhash
+     */
+    public function validateIfEmailbelongsToAnotherUser($email, $codhash) : bool {
+        $value = User::where('email', $email)->where('codhash', '!=', $codhash)->get();
+        return isset($value[0]->email) ? true : false;
+    }
+
+       /**
+     * Function to validate if phone belongs to another company.
+     * @param $phone
+     * @param $codhash
+     */
+    public function validateIfPhonebelongsToAnotherUser($phone, $codhash) : bool {
+        $value = User::where('phone', $phone)->where('codhash', '!=', $codhash)->get();
+        return isset($value[0]->phone) ? true : false;
+    }
+
+
+
+    /**
+     * Function to update user data.
+     */
+    public function updateUser($codhash, $id_profile, $name, $email, $current_password, $password, $phone, $alert, $active ) : void
+    {
+        User::where('codhash', $codhash)
+                ->update([
+                          'id_profile' => $id_profile,
+                          'name' => $name,
+                          'email' => $email,
+                          'password' => $current_password == $password ? $current_password : md5($password),
+                          'phone' => $phone,
+                          'alert' => $alert,
+                          'active' => $active,
+                        ]);
     }
 }

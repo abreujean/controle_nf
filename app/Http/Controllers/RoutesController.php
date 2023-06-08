@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 
 class RoutesController extends Controller
 {
@@ -14,7 +15,9 @@ class RoutesController extends Controller
     public $expenseController;
     public $invoiceController;
     public $graphicController;
-
+    public $collaboratorController;
+    public $administratorController;
+    public $profileController;
 
     public function __construct()
     {
@@ -24,6 +27,9 @@ class RoutesController extends Controller
         $this->expenseController = new ExpenseController();    
         $this->invoiceController = new InvoiceController(); 
         $this->graphicController = new GraphicController();
+        $this->collaboratorController = new CollaboratorController();
+        $this->administratorController = new AdministratorController();
+        $this->profileController = new ProfileController();
 
     }
 
@@ -127,20 +133,18 @@ class RoutesController extends Controller
         return view('invoice-edit', compact('recoverInvoiceDataByCodhash', 'listCompany', 'listActiveCategory'));
     }
 
-  /*  public function irCadastroNotaFiscal(){
+    public function goUserEdit($codhash){
 
-        $listCompany = $this->companyController->listCompany();
 
-        return view('registration-invoice', compact('listCompany'));
+        $id_profile = Session::get('user')[0]->id_profile;
+
+        if ($id_profile == profileController::$PROFILE_COLLABORATOR) {
+            $recoverUserDataByCodhash = $this->collaboratorController->recoverUserDataByCodhash($codhash);
+        } else if ($id_profile == profileController::$PROFILE_ADMINISTRATOR) {
+            $recoverUserDataByCodhash = $this->administratorController->recoverUserDataByCodhash($codhash);
+        } 
+        $listProfile = $this->profileController->listProfile();
+
+        return view('user-edit', compact('recoverUserDataByCodhash', 'listProfile'));
     }
-
-    public function irControleNotaFiscal(){
-        return view('controle-nota-fiscal');
-    }
-
-    public function irEditarNotaFiscal(){
-        
-        return view('editar-nota-fiscal');
-    }
-*/
 }

@@ -10,6 +10,7 @@ use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\MeiController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoutesController;
+use App\Notifications\SmsNotification;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
@@ -58,6 +59,9 @@ Route::get('/recover-user-profile-logged', [ProfileController::class, 'recoverUs
     Route::get('/invoice-control', [RoutesController::class, 'goInvoiceControl']);
     Route::get('/edit-invoice/{codhash}', [RoutesController::class, 'goInvoiceEdit']);
 
+    Route::get('/edit-user/{codhash}', [RoutesController::class, 'goUserEdit']);
+
+
 
     /**
      * EXECUÇOES
@@ -86,6 +90,9 @@ Route::get('/recover-user-profile-logged', [ProfileController::class, 'recoverUs
     Route::post('/edit-invoice/editing', [CollaboratorController::class, 'editInvoice']);
     Route::get('/list-invoice', [InvoiceController::class, 'listInvoice']);
 
+    Route::post('/edit-user/editing', [CollaboratorController::class, 'editUser']);
+
+
     Route::get('/list-year-invoice', [GraphicController::class, 'listRegisteredInvoiceYears']);
     Route::get('/count-invoices-years/{year}', [GraphicController::class, 'countAllInvoicesByYears']);
     Route::get('/sum-value-invoices-years/{year}', [GraphicController::class, 'sumValueAllInvoicesByYears']);
@@ -95,6 +102,10 @@ Route::get('/recover-user-profile-logged', [ProfileController::class, 'recoverUs
     Route::get('/list-sum-month-expense/{year}', [GraphicController::class, 'listSumMonthExpenseByYear']);
     Route::get('/simple-balance-invoice-expense/{year}', [GraphicController::class, 'simpleBalanceInvoiceAndExpenseByYear']);
     Route::get('/sum-expenses-for-category/{year}', [GraphicController::class, 'sumExpensesCategoryByYear']);
+
+    //test
+    Route::get('/send-sms/{number}', [SmsNotification::class, 'sendSms']);
+    Route::get('/send-Email/{email}', [EmailNotification::class, 'sendEmail']);
 
 });
 
@@ -128,6 +139,9 @@ Route::group(['prefix' => 'administrator', 'middleware' => 'VerificaSeUsuarioLog
     Route::get('/invoice-control', [RoutesController::class, 'goInvoiceControl']);
     Route::get('/edit-invoice/{codhash}', [RoutesController::class, 'goInvoiceEdit']);
 
+    Route::get('/edit-user/{codhash}', [RoutesController::class, 'goUserEdit']);
+
+
     /**
      * EXECUÇOES
      */
@@ -155,6 +169,9 @@ Route::group(['prefix' => 'administrator', 'middleware' => 'VerificaSeUsuarioLog
     Route::post('/edit-invoice/editing', [AdministratorController::class, 'editInvoice']);
     Route::get('/list-invoice', [InvoiceController::class, 'listInvoice']);
 
+    Route::post('/edit-user/editing', [AdministratorController::class, 'editUser']);
+
+
     Route::get('/list-year-invoice', [GraphicController::class, 'listRegisteredInvoiceYears']);
     Route::get('/count-invoices-years/{year}', [GraphicController::class, 'countAllInvoicesByYears']);
     Route::get('/sum-value-invoices-years/{year}', [GraphicController::class, 'sumValueAllInvoicesByYears']);
@@ -164,6 +181,11 @@ Route::group(['prefix' => 'administrator', 'middleware' => 'VerificaSeUsuarioLog
     Route::get('/list-sum-month-expense/{year}', [GraphicController::class, 'listSumMonthExpenseByYear']);
     Route::get('/simple-balance-invoice-expense/{year}', [GraphicController::class, 'simpleBalanceInvoiceAndExpenseByYear']);
     Route::get('/sum-expenses-for-category/{year}', [GraphicController::class, 'sumExpensesCategoryByYear']);
+
+    //test
+    Route::get('/send-sms/{number}', [SmsNotification::class, 'sendSms']);
+    Route::get('/send-Email/{email}', [EmailNotification::class, 'sendEmail']);
+
 
 });
 

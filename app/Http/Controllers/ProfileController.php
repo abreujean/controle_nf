@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Profile;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -27,4 +28,15 @@ class ProfileController extends Controller
      public function recoverUserProfileLogin() : array {
         return session()->get('user')[0]->profile->profile;
      }
+
+    /**
+     * Function to list profile in system
+     * @return JsonResponse
+     */
+    public function listProfile(): object
+    {
+        $profile = Profile::all();
+        return $profile;
+    }
+    
 }
