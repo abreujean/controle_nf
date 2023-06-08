@@ -82,9 +82,9 @@ Outras dependências: bootstrap, chart.js, datatables, daterangepicker, fontawes
 
 <p float="left">
 
- <img src="img/ModeloER.PNG" width="200" />
+ ![ModeloER.PNG](/public/img/ModeloER.PNG)
 
- <img src="img/Passosdoprojeto.PNG" width="200" /> 
+ ![Passosdoprojeto.PNG](/public/img/Passosdoprojeto.PNG)
 
 </p>
 
