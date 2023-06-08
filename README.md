@@ -80,10 +80,13 @@ Outras dependências: bootstrap, chart.js, datatables, daterangepicker, fontawes
 
 ## Modelo Entidade e Relacionamento e Passos tomados para Elaboração do sistema
 
-![alt text](https://git.vibbra.com.br/jean-1685398334/controle_nf/-/blob/main/public/img/ModeloER.PNG)
+<p float="left">
 
-![alt text](https://git.vibbra.com.br/jean-1685398334/controle_nf/-/blob/main/public/img/Passosdoprojeto.PNG)
+ <img src="https://git.vibbra.com.br/jean-1685398334/controle_nf/-/blob/main/public/img/ModeloER.PNG" width="200" />
 
+ <img src="https://git.vibbra.com.br/jean-1685398334/controle_nf/-/blob/main/public/img/Passosdoprojeto.PNG" width="200" /> 
+
+</p>
 
 ## Execute o seguinte comando para clonar o repositório:
 
