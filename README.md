@@ -9,6 +9,12 @@ Parte 1 - https://www.youtube.com/watch?v=vojK04bnKFw
 
 Parte 2 - https://www.youtube.com/watch?v=K57NzcFjfRk
 
+Usuarios de teste
+srvibbraneo@gmail.com
+senha: 123456
+jeandcabreu@gmail.com
+senha: 123456
+
 1.Tela Principal:
 
 Após o login, o usuário é redirecionado para a tela principal.
