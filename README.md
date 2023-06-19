@@ -60,9 +60,9 @@ Ao atingir 80% do limite de faturamento anual do MEI, é enviado um alerta infor
 O sistema foi desenvolvido utilizando as seguintes 
 
 tecnologias:
-Linguagem de programação: PHP
-Framework: Laravel 10
-Banco de Dados: Mysql
+1. Linguagem de programação: PHP
+2. Framework: Laravel 10
+3. Banco de Dados: Mysql
 
 Outras tecnologias: 
 
