@@ -76,9 +76,9 @@ Outras tecnologias:
 
 ## Requisitos de Instalação
 
-Versão do PHP: 8.2.1
-Banco de Dados MySql: 5.2.0
-Outras dependências: bootstrap, chart.js, datatables, daterangepicker, fontawesome-free inputmask, jquery, jquery-ui, moment, selec2, sweetalert2
+1. Versão do PHP: 8.2.1
+2. Banco de Dados MySql: 5.2.0
+3. Outras dependências: bootstrap, chart.js, datatables, daterangepicker, fontawesome-free inputmask, jquery, jquery-ui, moment, selec2, sweetalert2
 
 ## Instalação e Configuração
 
