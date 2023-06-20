@@ -4,7 +4,7 @@
 
 Funcionalidades
 
-Link dos video de apresentação so sistema
+Link dos vídeos de apresentação do sistema
 
 Parte 1 - https://www.youtube.com/watch?v=vojK04bnKFw
 
